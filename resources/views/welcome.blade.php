@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Koperasi Dana Masyarakat Indonesia')
+@section('title', 'Koperasi Daya Masyarakat Indonesia')
 
 @section('sidebar')
 
