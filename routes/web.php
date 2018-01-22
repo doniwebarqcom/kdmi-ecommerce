@@ -15,5 +15,6 @@ Route::get('/', 'HomeController@index');
 
 // Routing Menu Products
 Route::get('register', 'RegisterController@index');
+Route::post('register', 'RegisterController@storeData');
 
 Route::get('tes', 'TestController@index');

@@ -41,37 +41,56 @@
 						<div class="form-register" style="height: auto !important;">
 							<div class="title" style="margin-bottom: 0;">
 								<h3>Registrasi</h3>
-							</div>							
-
-							{!! Form::open(['url' => 'register', 'method' => 'post'], ['accept-charset' => 'utf-8']) !!}
+							</div>
+							<form action="#" method="get" id="form-register" accept-charset="utf-8">
 								<div class="form-box">
-									{{ Form::label('nama_lengkap', 'Nama Lengkap (*)', ['for' => 'nama_lengkap']) }}
-									{{ Form::text('nama_lengkap', '', ['id' => 'nama_lengkap', 'placeholder' => 'Nama Lengkap']) }}
-								</div>
-
+									<label for="name-register">NIK * </label>
+									<input type="text" id="name-register" name="name-register">
+								</div><!-- /.form-box -->
 								<div class="form-box">
-									{{ Form::label('no_telp', 'Nomor Telepon (*)', ['for' => 'no_telp']) }}
-									{{ Form::text('no_telp', '', ['id' => 'no_telp', 'placeholder' => 'Nomor Telepon']) }}
-								</div>
-
+									<label for="name-register">Nama * </label>
+									<input type="text" id="name-register" name="name-register">
+								</div><!-- /.form-box -->
 								<div class="form-box">
-									{{ Form::label('email', 'Email (*)', ['for' => 'email']) }}
-									{{ Form::email('email', '', ['id' => 'email', 'placeholder' => 'Email']) }}
-								</div>
-
+									<label for="name-register">Tempat Lahir * </label>
+									<input type="text" id="name-register" name="name-register">
+								</div><!-- /.form-box -->
 								<div class="form-box">
-									{{ Form::label('password', 'Password (*)', ['for' => 'password']) }}
-									{{ Form::password('password', ['id' => 'password', 'placeholder' => 'Password']) }}
-
+									<label for="name-register">Tanggal Lahir * </label>
+									<input type="text" id="name-register" name="name-register">
+								</div><!-- /.form-box -->
+								<div class="form-box">
+									<label for="name-register">Jenis Kelamin * </label>
+									<select name="jenis_kelamin">
+										<option> - Jenis Kelamin - </option>
+										<option> Laki - Laki </option>
+										<option> Wanita </option>
+									</select>
+								</div><!-- /.form-box -->
+								<div class="form-box">
+									<label for="name-register">Alamat * </label>
+									<textarea></textarea>
 								</div>
-
-
+								<div class="form-box">
+									<label for="name-register">Email address * </label>
+									<input type="text" id="name-register" name="name-register">
+								</div>
+								<div class="form-box">
+									<label for="name-register">No Telepon * </label>
+									<input type="text" id="name-register" name="name-register">
+								</div>
+								<div class="form-box">
+									<label for="name-register">KTP * </label>
+									<input type="file" id="name-register" name="name-register">
+								</div><!-- /.form-box -->
+								<div class="form-box">
+									<label for="name-register">Foto * </label>
+									<input type="file" id="name-register" name="name-register">
+								</div><!-- /.form-box -->
 								<div class="form-box">
 									<button type="submit" class="register">Register</button>
 								</div><!-- /.form-box -->
-							{!! Form::close() !!}
-
-
+							</form><!-- /#form-register -->
 						</div><!-- /.form-register -->
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
