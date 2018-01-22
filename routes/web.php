@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 // Routing Menu Products
 Route::get('register', 'RegisterController@index');
+
+Route::get('tes', 'TestController@index');

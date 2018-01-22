@@ -6,11 +6,6 @@ use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
-    /**
-     * [index description]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */
     public function index()
     {
         return view('register.index');
