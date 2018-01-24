@@ -24,45 +24,32 @@
                 </div><!-- /.col-md-4 -->
                 <div class="col-md-4">
                     <ul class="flat-unstyled">
-                        <li class="account">
-                            <a href="#" title="">My Account<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="unstyled">
-                                <li>
-                                    <a href="#" title="">Login</a>
-                                </li>
-                                <li>
-                                    <a href="wishlist.html" title="">Wishlist</a>
-                                </li>
-                                <li>
-                                    <a href="shop-cart.html" title="">My Cart</a>
-                                </li>
-                                <li>
-                                    <a href="my-account.html" title="">My Account</a>
-                                </li>
-                                <li>
-                                    <a href="shop-checkout.html" title="">Checkout</a>
-                                </li>
-                            </ul><!-- /.unstyled -->
-                        </li>
-                        <!--<li>
-                            <a href="#" title="">USD<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="unstyled">
-                                <li>
-                                    <a href="#" title="">Euro</a>
-                                </li>
-                                <li>
-                                    <a href="#" title="">Dolar</a>
-                                </li>
-                            </ul>
-                        </li>-->
-                        <li>
-                            <a href="#" title="">English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="unstyled">
-                                <li>
-                                    <a href="#" title="">Indonesia</a>
-                                </li>
-                            </ul><!-- /.unstyled -->
-                        </li>
+                        @if(isset($user_data) AND count($user_data) > 1)
+                            <li class="account">
+                                <a href="#" title="">My Account<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="unstyled">
+                                    <li>
+                                        <a href="wishlist.html" title="">Wishlist</a>
+                                    </li>
+                                    <li>
+                                        <a href="shop-cart.html" title="">My Cart</a>
+                                    </li>
+                                    <li>
+                                        <a href="my-account.html" title="">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="shop-checkout.html" title="">Checkout</a>
+                                    </li>
+                                </ul><!-- /.unstyled -->
+                            </li>
+                        @else
+                            <li>
+                                <a href="login" title="">Daftar</a>
+                            </li>
+                            <li>
+                                <a href="register" title="">Masuk</a>
+                            </li>
+                        @endIf                                    
                     </ul><!-- /.flat-unstyled -->
                 </div><!-- /.col-md-4 -->
             </div><!-- /.row -->

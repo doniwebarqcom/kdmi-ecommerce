@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Validator;
 
 class RegisterController extends Controller
@@ -18,10 +19,10 @@ class RegisterController extends Controller
     public function storeData(Request $request)
     {
     	$rules = [
-                'nama_lengkap'	=> 'required|min:3',
-                'email' 		=> 'required|email|unique:members,email',
-                'password' 		=> 'required|alpha_num|min:8',
-                'no_telp' 		=> 'required'
+	        'nama_lengkap'	=> 'required|min:3',
+	        'email' 		=> 'required|email',
+	        'password' 		=> 'required|alpha_num|min:8',
+	        'no_telp' 		=> 'required'
         ];
 
     	$validator = Validator::make(
@@ -34,8 +35,7 @@ class RegisterController extends Controller
 
 		$username = str_replace(' ', '_', $request->nama_lengkap);
 		$username.= date('dmyhis');
-		
-		$data_post['form_params'] = [
+		$body = [
 			'name' 		=> $request->nama_lengkap,
 			'email' 	=> $request->email,
 			'username' 	=> $username,
@@ -44,8 +44,22 @@ class RegisterController extends Controller
 			'password' 	=> $request->password
 		];
 
-		$response = (array) get_api_response('member/register', 'POST', $data_post);		
+		$response = get_api_response('member/register', 'POST', "", $body);
+		$code = $response->code;
+		$message = $response->message;
+		$error = $response->error;
+		
+		if($code != 200 OR $error){
+			if($code == 409)
+				return view('register.exists', ['message' => $message, 'input' => $request]);
+			else{
+				$category =  get_api_response('category');
+		    	$categoryInSearch =  get_api_response('category-insearch');
+				return view('register.index', ['message_error' => $message, 'categoryInSearch' => $categoryInSearch->data, 'category' => $category->data]);
+			}
+		}
 
-		return $response;
+		Session::put('token', $response->meta->token);
+		return redirect()->route('home');
     }
 }

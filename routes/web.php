@@ -12,9 +12,14 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('home',[
+    'as' 	=> 'home',
+    'uses' 	=> 'HomeController@index'
+]);
 
 // Routing Menu Products
 Route::get('register', 'RegisterController@index');
 Route::post('register', 'RegisterController@storeData');
-
+Route::get('login', 'AuthController@login');
+Route::post('login', 'AuthController@cek_login');
 Route::get('tes', 'TestController@index');
