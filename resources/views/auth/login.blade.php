@@ -43,7 +43,17 @@
 								<h3>Login Page</h3>
 							</div>
 							<br/>
+							
+
+
 							{!! Form::open(['url' => 'login', 'method' => 'post'], ['accept-charset' => 'utf-8']) !!}
+
+								@if(session('message_error'))
+									<div id='message_error' class="form-box">
+										<p style="color: red">{{ session('message_error') }}</p>
+									</div>
+								@endIf
+
 								<div class="form-box">
 									{{ Form::label('email', 'Username or email address * ', ['for' => 'email']) }}
 									{{ Form::text('email', '', ['id' => 'email', 'placeholder' => 'Email Or Username']) }}
@@ -337,4 +347,14 @@
 		</footer><!-- /footer -->
 
 	</div>
+
+	<script type="text/javascript">
+		ready(function(){
+			var fade_out = function() {
+			  $("#message_error").fadeOut().empty();
+			}
+
+			setTimeout(fade_out, 2000);		
+		});
+	</script>
 @endsection

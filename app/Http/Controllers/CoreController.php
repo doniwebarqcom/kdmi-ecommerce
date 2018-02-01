@@ -14,17 +14,7 @@ class CoreController extends Controller
 
 	public function getUserProfile()
 	{
-		$data = $this->request->session()->all();
-		$token = isset($data['token']) ? $data['token'] : false;
-		
-		if(! $token)
-			return [];
-
-		$header = [
-			'authorization'	=> 'Bearer '.$token
-		];
-
-		$response = get_api_response('user/info', 'GET', $header);
+		$response = get_api_response('user/info');
 		$data = (array) $response->data;
 		if(count($data) > 1)
 			$this->request->session()->put('token', $response->meta->token);

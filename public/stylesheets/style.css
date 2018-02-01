@@ -3351,5 +3351,10 @@ ol.comment-list li.comment .comment-text .comment-content p {
 		-o-transform:rotate(360deg);
 		transform:rotate(360deg);
 	}
-
 }
+
+.error {
+			margin-left: 10px;
+			width: auto;
+			color: red !important;
+		}

@@ -9,6 +9,6 @@ class TestController extends Controller
 {
     public function index()
     {
-       	return get_api_response('category');
+    	phpinfo();    	
     }
 }

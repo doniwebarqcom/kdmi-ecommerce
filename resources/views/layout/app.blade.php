@@ -17,13 +17,27 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/bootstrap.min.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=1213') }}">
 
     <!-- Reponsive -->
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/responsive.css') }}">
+    
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/select2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/select2.min.css') }}">
 
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
-
+    <script type="text/javascript">
+        function ready(callback){
+            // in case the document is already rendered
+            if (document.readyState!='loading') callback();
+            // modern browsers
+            else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+            // IE <= 8
+            else document.attachEvent('onreadystatechange', function(){
+                if (document.readyState=='complete') callback();
+            });
+        }
+    </script>
 </head>
 <body class="header_sticky">
 
@@ -46,6 +60,12 @@
     <script type="text/javascript" src="{{ asset('javascript/gmap3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('javascript/waves.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('javascript/jquery.countdown.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('javascript/jquery.validate.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('javascript/jquery.validate.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('javascript/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('javascript/select2.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/main.js') }}"></script>
 

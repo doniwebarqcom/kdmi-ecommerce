@@ -44,7 +44,7 @@ class RegisterController extends Controller
 			'password' 	=> $request->password
 		];
 
-		$response = get_api_response('member/register', 'POST', "", $body);
+		$response = get_api_response('member/register', 'POST', [], $body);
 		$code = $response->code;
 		$message = $response->message;
 		$error = $response->error;
@@ -59,7 +59,7 @@ class RegisterController extends Controller
 			}
 		}
 
-		Session::put('token', $response->meta->token);
+		$request->session()->put('token', $response->meta->token);
 		return redirect()->route('home');
     }
 }

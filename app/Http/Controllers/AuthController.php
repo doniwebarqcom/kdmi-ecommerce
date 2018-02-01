@@ -36,7 +36,7 @@ class AuthController extends Controller
 			'password' 	=> $request->password
 		];
 
-		$response = get_api_response('member/login', 'POST', $data_post);
+		$response = get_api_response('member/login', 'POST', [], $data_post);
 		$code = $response->code;
 		$message = $response->message;
 		$error = $response->error;
@@ -47,6 +47,16 @@ class AuthController extends Controller
 		}
 
 		Session::put('token', $response->meta->token);
-		return redirect()->route('home');
+        $page = $request->cookie('page');
+        if(is_null($page))
+            $page = 'home';
+
+		return redirect()->route($page);
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect()->route('home');
+    }   
 }
