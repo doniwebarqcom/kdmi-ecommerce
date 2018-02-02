@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/select2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/select2.min.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/uploadfile.css') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <script type="text/javascript">
         function ready(callback){
@@ -68,6 +69,8 @@
     <script type="text/javascript" src="{{ asset('javascript/select2.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/main.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('javascript/jquery.uploadfile.min.js') }}"></script>
 
     <script type="text/javascript">
     (function() {

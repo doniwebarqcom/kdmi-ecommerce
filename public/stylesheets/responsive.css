@@ -1088,6 +1088,10 @@
 		margin-bottom:30px;
 	}
 
+	.form-other {
+    	padding: 10px 45px 50px 55px;
+	}
+
 	.form-login, .form-register {
 		height:420px;
 	}

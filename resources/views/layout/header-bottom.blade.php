@@ -5,8 +5,8 @@
                     <div id="mega-menu">
                         <div class="btn-mega"><span></span>ALL CATEGORIES</div>
                         <ul class="menu">
+                        @if( isset($category))
                             @foreach ($category as $menuLevel1)
-
                                 @if(isset($menuLevel1->subcategory) AND count($menuLevel1->subcategory) > 0)
                                         @php
                                             $typemenu = "dropdown"
@@ -99,7 +99,8 @@
                                 </div>
                                 @endif
                             </li>
-                            @endForeach                                                                                
+                            @endForeach
+                        @endIf
                         </ul>
                     </div>
                 </div><!-- /.col-md-3 -->

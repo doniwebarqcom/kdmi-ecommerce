@@ -30,7 +30,6 @@ class AuthController extends Controller
 		if ($validator->fails())
 			return $validator->errors()->all();
 
-
 		$data_post = [
 			'email' 	=> $request->email,
 			'password' 	=> $request->password

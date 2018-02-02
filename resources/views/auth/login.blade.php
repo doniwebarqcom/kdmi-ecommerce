@@ -354,7 +354,7 @@
 			  $("#message_error").fadeOut().empty();
 			}
 
-			setTimeout(fade_out, 2000);		
+			setTimeout(fade_out, 2000);
 		});
 	</script>
 @endsection

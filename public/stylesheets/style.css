@@ -3358,3 +3358,10 @@ ol.comment-list li.comment .comment-text .comment-content p {
 			width: auto;
 			color: red !important;
 		}
+.ml-15{
+	margin-left: 15px;
+}
+
+.mr-15{
+	margin-right: 15px;
+}

@@ -20,20 +20,22 @@
                                 </select>
                                 <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                                 <div class="all-categories">
-                                    @foreach ($categoryInSearch as $categorySearch)
-                                    <div class="cat-list-search">
-                                        <div class="title">
-                                            {{ $categorySearch->name }}                                                
+                                    @if(isset($categoryInSearch))
+                                        @foreach ($categoryInSearch as $categorySearch)
+                                        <div class="cat-list-search">
+                                            <div class="title">
+                                                {{ $categorySearch->name }}                                                
+                                            </div>
+                                            @isset($categorySearch->sub_category)
+                                            <ul>
+                                                @foreach ($categorySearch->sub_category as $sub)
+                                                    <li>{{ $sub->name }}</li>
+                                                @endforeach
+                                            </ul>
+                                            @endisset
                                         </div>
-                                        @isset($categorySearch->sub_category)
-                                        <ul>
-                                            @foreach ($categorySearch->sub_category as $sub)
-                                                <li>{{ $sub->name }}</li>
-                                            @endforeach
-                                        </ul>
-                                        @endisset
-                                    </div>
-                                    @endforeach                                    
+                                        @endforeach
+                                    @endIf
                                 </div><!-- /.all-categories -->
                             </div><!-- /.cat-wrap -->
                             <div class="box-search">
@@ -154,13 +156,13 @@
                                                 Categories
                                             </div>
                                             <ul>
-                                                
+                                            @if( isset($categoryInSearch))
                                                 @foreach ($categoryInSearch as $categorySearch)
                                                 <li>
                                                     <a href="{{ $categorySearch->url }}">{{ $categorySearch->fullname }}</a>
-                                                </li>                                                
+                                                </li>                             
                                                 @endForeach
-
+                                            @endIf
                                             </ul>
                                         </div><!-- /.cat-list-search -->
                                     </div><!-- /.box-cat -->

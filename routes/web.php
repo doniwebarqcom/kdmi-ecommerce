@@ -31,10 +31,12 @@ Route::get('place/pos', 'PlaceController@pos');
 Route::get('place/regency', 'PlaceController@regency');
 
 Route::post('image/upload', 'ImageController@upload');
+Route::post('image/mandiri', 'ImageController@mandiri');
 
 Route::get('koprasi/register', ['as'=> 'register-koprasi', 'uses' => 'KoprasiController@register']);
 Route::post('koprasi/register', 'KoprasiController@store');
 
 Route::get('product-add', ['as' => 'product-add', 'uses' => 'ProductController@add']);
-
-
+Route::post('koprasi/product/add', ['as' => 'product-store', 'uses' => 'ProductController@store']);
+Route::get('category/ajax', ['as' => 'ajax-category', 'uses' => 'ProductController@getAjaxCategory']);
+Route::get('product/succes-upload', ['as' => 'product-succes-input', 'uses' => 'ProductController@succesStore']);
