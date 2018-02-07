@@ -29,7 +29,6 @@ class ProductController extends CoreController
 
     public function store(Request $request)
     {
-        
         $description = $request->deskripsi;
         $price = str_replace(",", "", $request->harga_barang);
         $weight = str_replace(",", "", $request->berat_barang);
@@ -43,22 +42,52 @@ class ProductController extends CoreController
         $category3 = $request->category3;
         $minumin = $request->minumin;
         $nama_barang = $request->nama_barang;
+        $discont = $request->discont;
+        $discont_anggota = $request->discont_koprasi;
         $real_upload = array_diff($upload, $abort);
         $primary_image = reset($real_upload);        
         $category = (isset($category3) ? $category3 : (isset($category2) ?  $category2 : $category1));
+        $criteria = $request->criteria ? $request->criteria : [];
+        $grosir_dari = $request->jumlah_ke ? $request->jumlah_ke : [];
+        $grosir_sampai = $request->jumlah_sampai ? $request->jumlah_sampai : [];
+        $grosir_harga = $request->harga_grosir ? $request->harga_grosir : [];
+
         array_shift($real_upload);
+        $result_criteria = [];
+        foreach ($criteria as $key => $value) {
+            if($value !== "")
+                $result_criteria[] = (int) $value;
+        }
+
+        $result_start = [];
+        $result_until = [];
+        $result_price = [];
+        foreach ($grosir_dari as $key => $value) {
+            if($value != "" AND $grosir_sampai[$key] != "" AND $grosir_harga[$key] != "")
+            {
+                $result_start[] = (int) $value;
+                $result_until[] = (int) $grosir_sampai[$key] ;
+                $result_price[] = (int) str_replace(".", "", $grosir_harga[$key]);
+            }
+        }
         
         $body = array(            
-            'category'      => (int) $category,
-            'name'          => $nama_barang,
-            'description'   => $description,
-            'price'         => (int) $price,
-            'primary_image' => $primary_image,
-            'avaible'       => $avaible,
-            'weight'        => (int) $weight,
-            'stock'         => (int) $stock,
-            'new'           => $new,
-            'images'        => $real_upload
+            'category'          => (int) $category,
+            'name'              => $nama_barang,
+            'description'       => $description,
+            'price'             => (int) $price,
+            'discont'           => (double) $discont,
+            'discont_anggota'   => (double) $discont_anggota,
+            'primary_image'     => $primary_image,
+            'avaible'           => $avaible,
+            'weight'            => (int) $weight,
+            'stock'             => (int) $stock,
+            'new'               => $new,
+            'images'            => $real_upload,
+            'criterias'         => $result_criteria,
+            'grosir_start'      => $result_start,
+            'grosir_until'      => $result_until,
+            'grosir_price'      => $result_price,
         );
         
         $response = get_api_response('product/input', 'POST', [], $body);
@@ -104,6 +133,14 @@ class ProductController extends CoreController
             return redirect()->route('register-koprasi')->with('message_error', 'Anda belum mempunyai koprasi sendiri');        
                
         return view('koprasi.succes_upload', ['user_data' => $user_data]);
+    }
+
+    public function criteria(Request $request)
+    {
+        $category = $request->get('category') ? $request->get('category') : 1;
+        $body = ['category' => $category];
+        $category =  get_api_response('criteria/category', 'GET', [], $body);
+        return $category->data;
     }
 
     function generateData($value)

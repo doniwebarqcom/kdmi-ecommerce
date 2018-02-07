@@ -40,3 +40,4 @@ Route::get('product-add', ['as' => 'product-add', 'uses' => 'ProductController@a
 Route::post('koprasi/product/add', ['as' => 'product-store', 'uses' => 'ProductController@store']);
 Route::get('category/ajax', ['as' => 'ajax-category', 'uses' => 'ProductController@getAjaxCategory']);
 Route::get('product/succes-upload', ['as' => 'product-succes-input', 'uses' => 'ProductController@succesStore']);
+Route::get('criteria', ['uses' => 'ProductController@criteria']);

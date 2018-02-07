@@ -1,4 +1,4 @@
-var category ;	
+var category ;
 ready(function(){
 
 	$('.currency').maskMoney({thousands:'.', decimal:',', allowZero: true, precision: 0});
@@ -10,6 +10,45 @@ ready(function(){
 		var res = parseFloat(value.replace(/,/g, "."));
 		if(res > 100)
 			$(this).val(100);
+	});
+
+	$('[id^=category]').change(function(){
+		var value = $(this).val();
+
+		if(value > 0)
+		{
+
+			$.ajax({
+				type: "GET",
+				url: "criteria",
+				data : {
+					category : value
+				},
+				dataType: 'json',
+				success: function(data){
+					var content = "";
+					$("#table-criteria").html("");
+					
+					
+					$.each( data, function( key, value ) {
+						content += "<tr>"+
+										"<td style='width:38%'>"+value.label+" </td>" +
+										"<td style='width:20px;' align='center'>:</td>"+
+										"<td>" +
+											"<select style='margin-top: 10px;' class='select-noinline-form' id='criteria' name='criteria[1]'>"+
+												"<option value=''>- Silahkan Pilih -</option>";
+
+						$.each( value.selection, function( subkey, subvalue ) {
+							content += "<option value='"+subvalue.id+"'>"+subvalue.value+"</option>";
+						});
+
+						content += "</select></td></tr>";						
+					});
+
+					$("#table-criteria").prepend(content);
+				}
+			});
+		}
 	});
 
 	$('[id^=harga-grosir-]').keyup(function(){
@@ -82,18 +121,18 @@ ready(function(){
 
 	setTimeout(fade_out, 2000);
 
-	$("#addProduct").validate({
-		rules: {
-			nama_barang: "required",
-			category: "required",
-			deskripsi: "required"
-		},
-		messages: {
-			nama_barang: "kolom harus diisi",
-			category: "kolom harus dipilih",
-			deskripsi: "kolom harus diisi"
-		}
-	});
+	// $("#addProduct").validate({
+	// 	rules: {
+	// 		nama_barang: "required",
+	// 		category: "required",
+	// 		deskripsi: "required"
+	// 	},
+	// 	messages: {
+	// 		nama_barang: "kolom harus diisi",
+	// 		category: "kolom harus dipilih",
+	// 		deskripsi: "kolom harus diisi"
+	// 	}
+	// });
 
 	$("#grosir").click(function(){
 		var status_grosir = parseInt($("#status_grosir").val());
@@ -123,7 +162,7 @@ ready(function(){
 
 			$("#category3").hide();
 		}
-	});			
+	});
 
 	$("#category").change(function(){
 		var id = $(this).val();
