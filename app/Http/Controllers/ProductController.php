@@ -48,8 +48,9 @@ class ProductController extends CoreController
         $category = (isset($category3) ? $category3 : (isset($category2) ?  $category2 : $category1));
         array_shift($real_upload);
         
-        $body = array(
+        $body = array(            
             'category'      => (int) $category,
+            'name'          => $nama_barang,
             'description'   => $description,
             'price'         => (int) $price,
             'primary_image' => $primary_image,
@@ -62,7 +63,9 @@ class ProductController extends CoreController
         
         $response = get_api_response('product/input', 'POST', [], $body);
         if($response->code == 200)
-            return redirect()->route('product/succes-upload');
+            return redirect()->route('product-succes-input');
+        else
+            return redirect()->route('product-add')->with('message_error', 'gagal dalam menyimpan silahkan ulangi');
     }
 
     public function getAjaxCategory()

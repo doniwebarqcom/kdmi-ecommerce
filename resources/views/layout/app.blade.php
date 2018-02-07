@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/bootstrap.min.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=1213') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=1') }}">
 
     <!-- Reponsive -->
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/responsive.css') }}">
@@ -71,6 +71,8 @@
     <script type="text/javascript" src="{{ asset('javascript/main.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/jquery.uploadfile.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('javascript/jquery.maskMoney.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
     (function() {

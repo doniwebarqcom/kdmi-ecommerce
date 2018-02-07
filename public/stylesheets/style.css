@@ -3365,3 +3365,11 @@ ol.comment-list li.comment .comment-text .comment-content p {
 .mr-15{
 	margin-right: 15px;
 }
+
+.w-90p{
+	width: 90% !important;
+}
+
+.w-70p{
+	/*width: 70% !important;*/
+}

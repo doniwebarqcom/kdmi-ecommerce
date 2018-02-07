@@ -47,16 +47,23 @@
 							<div class="form-register" style="height: auto !important;padding-top: 10px">
 								<div class="title" style="margin-bottom: 0;">
 									<h4 align="left">Apa yang Anda Jual</h4>
+									
+									@if(session('message_error'))	
+										<div  id="message_error" style="border: 1px; background-color: #f5f5f5;padding-bottom: 20px;">
+											<p style="color: red">{{ session('message_error') }}</p>
+										</div>
+									@endIf
 								</div>
 								<hr/>
 								{!! Form::open(['url' => 'koprasi/product/add', 'method' => 'post', 'id' => 'addProduct'], ['accept-charset' => 'utf-8']) !!}
-								
+								{{ Form::hidden('status_grosir', 0, array('id' => 'status_grosir')) }}
+								{{ Form::hidden('cond', 1, array('id' => 'cond')) }}
+															
 								<div id='addImage'></div>
-								<div id='delImage'></div>
-								
+								<div id='delImage'></div>															
 								<div class="form-box">
 									{{ Form::label('nama_barang', 'Nama Barang (*)', ['for' => 'nama_barang']) }}
-									{{ Form::text('nama_barang', '', ['id' => 'nama_lengkap', 'placeholder' => 'Nama Barang']) }}
+									{{ Form::text('nama_barang', '', ['id' => 'nama_lengkap', 'placeholder' => 'Nama Barang', 'class' => 'text_input']) }}
 								</div>
 
 								<div class="form-box">
@@ -85,9 +92,7 @@
 
 								<div id="fileuploader">Upload</div>								
 								<div style="clear:both"></div>
-								
-								
-
+																
 							</div><!-- /.form-register -->
 						</div><!-- /.col-md-6 -->
 					</div><!-- /.row -->
@@ -101,45 +106,195 @@
 							<div class="form-register" style="height: auto !important;padding-top: 10px">
 								<div class="title" style="margin-bottom: 0;">
 									<h4 align="lexft">Detil Produk</h4>
+									<h5 align="lexft">Untuk Costumer</h5>
 								</div>
 								<hr/>
 								
 								<div class="form-box">
 									{{ Form::label('harga_barang', 'Harga Barang (Rp)', ['for' => 'harga_barang']) }}
-									{{ Form::text('harga_barang', '', ['id' => 'harga_barang', 'placeholder' => 'Harga Barang', 'class' => 'txtboxToFilter formatNumber']) }}
+									{{ Form::text('harga_barang', '', ['id' => 'harga_barang', 'placeholder' => 'Harga Barang', 'class' => 'currency text_input']) }}									
+								</div>
+																						
+								<div class="row">
+									<div class="col-md-3">
+										{{ Form::label('discont', 'Discont Costumer (%)', ['for' => 'discont']) }}
+										{{ Form::text('discont', 0, ['id' => 'discont', 'placeholder' => 'Discont Barang', 'class' => 'currency3 percent']) }}
+									</div>
+									<div class="col-md-3">
+										{{ Form::label('discont_koprasi', 'Discont Anggota Koprasi (%)', ['for' => 'discont_koprasi']) }}
+
+										{{ Form::text('discont_koprasi', 0, ['id' => 'discont_koprasi', 'placeholder' => 'Discont Angota Koprasi', 'class' => 'currency3 percent']) }}
+									</div>
 								</div>
 
-								<div class="form-box">
-									{{ Form::label('berat_barang', 'Berat Barang (Kg)', ['for' => 'berat_barang']) }}
-									{{ Form::text('berat_barang', '', ['id' => 'berat_barang', 'placeholder' => 'Berat Barang' , 'class' => 'txtboxToFilter formatNumber']) }}
+								<br/>
+								<div> 
+									<strong><a style="margin-left: 20px;" id="grosir" > + Tambah Harga Grosir</a></strong>
 								</div>
 
-								<div class="form-box">
-									{{ Form::label('minumin', '', ['for' => 'Pemesanan Minimum / Buah']) }}
-									{{ Form::text('minumin', 1, ['id' => 'minumin', 'placeholder' => 'Pemesanan Minimum', 'class' => 'txtboxToFilter formatNumber']) }}
-								</div>
+								<div id="harga-grosir" style="display: none;">
+									<div class="row" style="margin-bottom: 10px">
+										<div class="col-sm-1"><b>No</b></div>
+										<div class="col-sm-2"><b>Dari (jumlah)</b></div>
+										<div class="col-sm-2"><b>Ke (jumlah)</b></div>
+										<div class="col-sm-2"><b>Harga</b></div>
+										<div class="col-sm-2"><b>Harga Anggota</b></div>
+										<div class="col-sm-3"></div>
+									</div>
 
-								<div class="form-box">
-									{{ Form::label('status', '', ['for' => 'Status']) }}
-									{{ Form::select('status', [1 => 'stok tersedia', 2 => 'stok kosong'], null, ['id' => 'status', 'class' => 'select-noinline-form', 'class' => 'select-noinline-form']) }}
-								</div>
+									<div class="row" style="margin-top: 2px">
+										<div class="col-sm-1">1</div>
+										<div class="col-sm-2">
+											<input class="currency2 input_grosir" id="jumlah-ke-1" data-type="gro" data-id="1" type="text" name="jumlah_ke[]">
+										</div>
+										<div class="col-sm-2">
+											<input class="currency2 input_grosir" id="jumlah-sampai-1" data-type="gro" data-id="1" type="text" name="jumlah_sampai[]">
+										</div>
+										<div class="col-sm-2">
+											<input class="currency input_grosir" id="harga-grosir-1" data-type="price" data-id="1" type="text" name="harga_grosir[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-angota-1" data-type="price" data-id="1" type="text" name="harga_grosir_angota[]">
+										</div>
+										<div class="col-sm-3">
+											<strong>
+												<a data-id="1" class="delete-form-fill" style="color: red;cursor:pointer;display: none" id="delete-form-fill-1" >	Hapus
+												</a>
+											</strong>
+											<strong>
+												<span id="error-grosir-1"></span>
+											</strong>
+										</div>
+									</div>
 
-								<div class="form-box" id="stok">
-									{{ Form::label('stok', '', ['for' => 'stok']) }}
-									{{ Form::text('stok', 0, ['id' => 'stok', 'placeholder' => 'Stok', 'class' => 'txtboxToFilter formatNumber']) }}
-								</div>
+									<div class="row" style="margin-top: 2px">
+										<div class="col-sm-1">2</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-ke-2" data-type="gro" data-id="1" type="text" name="jumlah_ke[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-sampai-2" data-type="gro" data-id="2" type="text" name="jumlah_sampai[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-2" data-type="price" data-id="2" type="text" name="harga_grosir[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-angota-2" data-type="price" data-id="2" type="text" name="harga_grosir_angota[]">
+										</div>
+										<div class="col-sm-3">
+											<strong>
+												<a data-id="2" class="delete-form-fill" style="color: red;cursor:pointer;display: none" id="delete-form-fill-2" >	Hapus
+												</a>
+											</strong>
+											<strong>
+												<span id="error-grosir-2"></span>
+											</strong>
+										</div>
+									</div>
 
-								<div class="form-box">
-									{{ Form::label('konsisi', '', ['for' => 'Kondisi']) }}<br/>
-									{{ Form::radio('cond', '1', 'true') }} Baru
-									{{ Form::radio('cond', '2') }} Bekas
+									<div class="row" style="margin-top: 2px">
+										<div class="col-sm-1">3</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-ke-3" data-type="gro" data-id="3" type="text" name="jumlah_ke[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-sampai-3" data-type="gro" data-id="3" type="text" name="jumlah_sampai[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-3" data-type="price" data-id="3" type="text" name="harga_grosir[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-angota-3" data-type="price" data-id="3" type="text" name="harga_grosir_angota[]">
+										</div>
+										<div class="col-sm-3">
+											<strong>
+												<a data-id="3" class="delete-form-fill" style="color: red;cursor:pointer;display: none" id="delete-form-fill-3" >	Hapus
+												</a>
+											</strong>
+											<strong>
+												<span id="error-grosir-3"></span>
+											</strong>
+										</div>
+									</div>
+
+									<div class="row" style="margin-top: 2px">
+										<div class="col-sm-1">4</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-ke-4" data-type="gro" data-id="4" type="text" name="jumlah_ke[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-sampai-4" data-type="gro" data-id="4" type="text" name="jumlah_sampai[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-4" data-type="price" data-id="4" type="text" name="harga_grosir[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-angota-4" data-type="price" data-id="4" type="text" name="harga_grosir_angota[]">
+										</div>
+										<div class="col-sm-3">
+											<strong>
+												<a data-id="4" class="delete-form-fill" style="color: red;cursor:pointer;display: none" id="delete-form-fill-4" >	Hapus
+												</a>
+											</strong>
+											<strong>
+												<span id="error-grosir-4"></span>
+											</strong>
+										</div>
+									</div>
+
+									<div class="row" style="margin-top: 2px;">
+										<div class="col-sm-1">5</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-ke-5" data-type="gro" data-id="5" type="text" name="jumlah_ke[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency2 input_grosir" id="jumlah-sampai-5" data-type="gro" data-id="5" type="text" name="jumlah_sampai[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-5" data-type="price" data-id="5" type="text" name="harga_grosir[]">
+										</div>
+										<div class="col-sm-2">
+											<input readonly="readonly" class="currency input_grosir" id="harga-grosir-angota-5" data-type="price" data-id="5" type="text" name="harga_grosir_angota[]">
+										</div>
+										<div  class="col-sm-3">
+											<strong>
+												<a data-id="5" class="delete-form-fill" style="color: red;cursor:pointer;display: none" id="delete-form-fill-5" >	Hapus
+												</a>
+											</strong>
+											<strong>
+												<span id="error-grosir-5"></span>
+											</strong>
+										</div>
+									</div>
 								</div>
+								<br/>
+								<div class="row">
+									<div class="col-md-3">
+										{{ Form::label('berat_barang', 'Berat Barang (Kg)', ['for' => 'berat_barang']) }}
+										{{ Form::text('berat_barang', 1, ['id' => 'berat_barang', 'placeholder' => 'Berat Barang' , 'class' => 'currency']) }}
+									</div>
+									<div class="col-md-3">
+										{{ Form::label('minimum', 'Pemesanan Minimum / Buah', ['for' => 'minimum']) }}
+										{{ Form::text('minimum', 1, ['id' => 'minimum', 'placeholder' => 'Pemesanan Minimum', 'class' => 'currency']) }}
+									</div>
+								</div><br/>
+
+								<div class="row">
+									<div class="col-md-3">
+										{{ Form::label('status', '', ['for' => 'Status']) }}
+										{{ Form::select('status', [1 => 'stok tersedia', 2 => 'stok kosong'], null, ['id' => 'status', 'class' => 'select-noinline-form ']) }}
+									</div>
+									<div class="col-md-3">
+										{{ Form::label('stok', '', ['for' => 'stok']) }}
+										{{ Form::text('stok', 0, ['id' => 'stok', 'placeholder' => 'Stok', 'class' => 'currency']) }}
+									</div>
+								</div>																
 								
 							</div><!-- /.form-register -->
 						</div><!-- /.col-md-6 -->
 					</div><!-- /.row -->
 				</div><!-- /.container -->
-			</section><!-- /.flat-account -->
+			</section><!-- /.flat-account -->			
 
 			<section class="flat-account background" style="padding-top: 10px">
 				<div class="container">
@@ -175,177 +330,7 @@
 		</footer><!-- /footer -->
 
 		@include('layout.footer-copyright')
-	</div>
-	
-	<script type="text/javascript">
-		var category ;	
-		ready(function(){
-
-			$("#addProduct").validate({
-				rules: {
-					nama_barang: "required",
-					category: "required",
-					deskripsi: "required"
-				},
-				messages: {
-					nama_barang: "kolom harus diisi",
-					category: "kolom harus dipilih",
-					deskripsi: "kolom harus diisi"
-				}
-			});
-
-		    $.ajax({
-				type: "GET",
-				url: "{{ url('category/ajax') }}",
-				dataType: 'json',
-				success: function(data){
-					category = data;
-					$("#category").html("<option value=''>-silahkan pilih-</option>");
-					$.each( data.parent_0, function( key, value ) {
-						var option = "<option value='"+value.id+"'>"+value.name+"</option>";
-						$("#category").append(option);
-					});
-
-					$("#category3").hide();
-				}
-			});			
-
-			$("#category").change(function(){
-				var id = $(this).val();
-				$("#category3").hide();
-				category.anObjectName = 'parent_'+id;
-				if (category[category.anObjectName] !== undefined) {
-					$("#category2").html("<option value=''>-silahkan pilih-</option>");					
-					$.each( category[category.anObjectName], function( key, value ) {
-						var option = "<option value='"+value.id+"'>"+value.name+"</option>";
-						$("#category2").append(option);
-					});
-
-					$("#category2").show();
-				}else {
-					$("#category2").hide();
-				}
-			});
-
-			$("#category2").change(function(){
-				var id = $(this).val();
-				category.anObjectName = 'parent_'+id;
-				if (category[category.anObjectName] !== undefined) {
-					$("#category3").html("<option value=''>-silahkan pilih-</option>");
-					$.each( category[category.anObjectName], function( key, value ) {
-						var option = "<option value='"+value.id+"'>"+value.name+"</option>";
-						$("#category3").append(option);
-					});
-
-					$("#category3").show();
-				}else {
-					$("#category3").hide();
-				}
-			});
-
-			$("#fileuploader").uploadFile({
-				url: "{{ url('image/mandiri') }}",
-				returnType:"json",
-				formData: {_token: '{{csrf_token()}}' },
-				showPreview:true,
-				showProgress:true,
-				showFileSize:false,
-				showDelete:true,
-				maxFileCount:5,
-				previewHeight: "100px",
-				previewWidth: "100px",
-				fileName:"image",
-				customProgressBar: function(obj, s)
-		        {
-		        	$("#addImage").html("");
-		        	console.log(obj.responses);
-		        	$.each( obj.responses, function( key, value ) {		        		
-						$("#addImage").append("<input type='hidden' name='upload[]' value='"+value+"'>");
-					});
-
-		            this.statusbar = $("<div style='float: left;' class='ajax-file-upload-statusbar'></div>");
-		            this.preview = $("<img class='ajax-file-upload-preview' />").width(s.previewWidth).height(s.previewHeight).appendTo(this.statusbar).hide();
-		            this.filename = $("<div class='ajax-file-upload-filename'></div>").appendTo(this.statusbar);
-		            this.progressDiv = $("<div class='ajax-file-upload-progress'>").appendTo(this.statusbar).hide();
-		            this.progressbar = $("<div class='ajax-file-upload-bar'></div>").appendTo(this.progressDiv);
-		            this.abort = $("<div>" + s.abortStr + "</div>").appendTo(this.statusbar).hide();
-		            this.cancel = $("<div>" + s.cancelStr + "</div>").appendTo(this.statusbar).hide();
-		            this.done = $("<div>" + s.doneStr + "</div>").appendTo(this.statusbar).hide();
-		            this.download = $("<div>" + s.downloadStr + "</div>").appendTo(this.statusbar).hide();
-		            this.del = $("<div>" + s.deleteStr + "</div>").appendTo(this.statusbar).hide();
-		            this.abort.addClass("ajax-file-upload-red");
-		            this.done.addClass("ajax-file-upload-green");
-		            this.download.addClass("ajax-file-upload-green");            
-		            this.cancel.addClass("ajax-file-upload-red");
-		            this.del.addClass("ajax-file-upload-red");
-		            
-		            return this;
-		        },
-				onSuccess:function(files, data, xhr, pd)
-				{
-					$("#addImage").append("<input type='hidden' name='upload[]' value='"+data+"'>");
-					$(".ajax-file-upload-filename").remove();
-				},
-				deleteCallback: function(data)
-				{        				    
-					$("#delImage").append("<input type='hidden' name='abort[]' value='"+data+"'>");
-				}
-			});
-
-			$("#status").change(function() {
-				var status = $(this).val();
-
-				if(status == 1)
-				{
-					$("#stok").fadeIn( 600);
-				}else
-					{
-						$("#stok").fadeOut( 600);
-					}
-			});
-
-			$(".txtboxToFilter").keydown(function (e) {
-
-				var variable = $(this).val();
-				var res = variable.replace(/,/g, "");				
-				$(this).val(res);
-		        // Allow: backspace, delete, tab, escape, enter and .
-		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-		             // Allow: Ctrl/cmd+A
-		            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-		             // Allow: Ctrl/cmd+C
-		            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-		             // Allow: Ctrl/cmd+X
-		            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-		             // Allow: home, end, left, right
-		            (e.keyCode >= 35 && e.keyCode <= 39)) {
-		                 // let it happen, don't do anything
-		                 return;
-		        }
-		        // Ensure that it is a number and stop the keypress
-		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		            e.preventDefault();
-		        }
-
-		    });		    
-
-		    $(".formatNumber").change(function(e){
-		    	var harga_barang = parseInt($(this).val());
-				$(this).val(format1(harga_barang, ","));
-		    });
-
-		    function format1(n, split) {
-			    return n.toFixed(0).replace(/./g, function(c, i, a) {
-			        return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? split + c : c;
-			    });
-			}
-
-			$("#test").click(function(){
-				console.log( $("#addProduct" ).serializeArray() );
-			});		
-
-		});
-	</script>
+	</div>	
 
 	<style type="text/css">
 		.select-form {
@@ -368,6 +353,11 @@
 		#category2{
 			display: none;
 		}
+
+		#grosir:hover { 
+		    color:#f28b00;
+		    cursor:pointer;
+		}
 		
 		#category3{
 			display: none;
@@ -385,5 +375,26 @@
 		    display: none;
 		}
 
-	</style>	
+		input[readonly]
+		{
+		    background-color:#cccccc;
+		}
+
+		.text_input{
+			width: 40% !important;
+		}
+
+		.delete_form{
+			color: red;
+			margin-left: 10px;
+		}
+
+		.input_grosir{
+			height: 30px !important;
+    		border-radius: 13px !important;
+    		padding: 8px 15px 8px 7px !important;
+		}
+
+	</style>		
+       {!! Html::script('javascript/koprasi/content.js?v=23') !!}
 @endsection
