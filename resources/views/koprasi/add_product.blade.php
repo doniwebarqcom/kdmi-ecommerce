@@ -41,7 +41,7 @@
 			</section><!-- /.flat-account -->
 
 				
-			{!! Form::open(['url' => 'koprasi/product/add', 'method' => 'post', 'id' => 'addProduct'], ['accept-charset' => 'utf-8']) !!}		
+			{!! Form::open(['url' => 'koprasi/product/add', 'method' => 'post', 'id' => 'addProduct'], ['accept-charset' => 'utf-8']) !!}
 				<section class="flat-account background" style="padding-top: 10px">
 					<div class="container">
 						<div class="row">

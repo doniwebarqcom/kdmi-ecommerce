@@ -18,10 +18,11 @@ class RegisterController extends Controller
 
     public function storeData(Request $request)
     {
+    	
     	$rules = [
 	        'nama_lengkap'	=> 'required|min:3',
 	        'email' 		=> 'required|email',
-	        'password' 		=> 'required|alpha_num|min:8',
+	        'password' 		=> 'required',
 	        'no_telp' 		=> 'required'
         ];
 
@@ -30,9 +31,13 @@ class RegisterController extends Controller
     		$rules
 		);
 
-		if ($validator->fails())
-			return $validator->errors()->all();
-
+		if ($validator->fails()){
+			$category =  get_api_response('category');
+		    $categoryInSearch =  get_api_response('category-insearch');
+			
+			return view('register.index', ['message_error' => $validator->errors()->all(), 'categoryInSearch' => $categoryInSearch->data, 'category' => $category->data]);
+		}
+							
 		$username = str_replace(' ', '_', $request->nama_lengkap);
 		$username.= date('dmyhis');
 		$body = [
