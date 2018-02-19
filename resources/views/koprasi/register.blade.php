@@ -138,6 +138,9 @@
 			    }
 			});
 
+		    var currentRequest = null;
+
+		    
 		    $('#kode_pos').select2({
 		    	placeholder: "Cari Kode pos",
 			    minimumInputLength: 2,

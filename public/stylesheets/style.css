@@ -1249,7 +1249,7 @@ ul.flat-unstyled li > ul > li > a {
 
 /* Header Bottom */
 .header-bottom {
-	background-color:#f28b00;
+	background-color:#232f3f;
 }
 
 .header-bottom > .container > .row {
@@ -1281,7 +1281,7 @@ ul.flat-unstyled li > ul > li > a {
 #mega-menu > .btn-mega {
 	font-weight:600;
 	font-size:16px;
-	color:#fefefe;
+	color:#EA8B05;
 	height:65px;
 	padding-left:87px;
 	line-height:65px;

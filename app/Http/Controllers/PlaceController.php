@@ -23,12 +23,33 @@ class PlaceController extends CoreController
     public function regency()
     {
         $body = [
-            'query'      => $this->request->get('q')
+            'query'      => $this->request->get('q'),
+            'province'   => $this->request->get('province')
         ];
 
         $regency =  get_api_response('place/regency', 'GET', [], $body);
         echo json_encode($regency->data);
     }
 
-    
+    public function district()
+    {
+        $body = [
+            'query'     => $this->request->get('q'),
+            'regency'   => $this->request->get('regency')
+        ];
+
+        $district =  get_api_response('place/district', 'GET', [], $body);
+        echo json_encode($district->data);
+    }
+
+    public function village()
+    {
+        $body = [
+            'query'      => $this->request->get('q'),
+            'district'   => $this->request->get('district')
+        ];
+
+        $district =  get_api_response('place/village', 'GET', [], $body);
+        echo json_encode($district->data);
+    }
 }

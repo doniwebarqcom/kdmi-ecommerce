@@ -4,7 +4,7 @@
                 <div class="col-md-3">
                     <div id="logo" class="logo">
                         <a href="index.html" title="">
-                            <img src="{{ asset('images/logo.jpeg') }}" alt="">
+                            <img src="{{ asset('images/kodami.png') }}" alt="">
                         </a>
                     </div><!-- /#logo -->
                 </div><!-- /.col-md-3 -->

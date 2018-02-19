@@ -18,8 +18,8 @@ class AuthController extends Controller
     public function cek_login(Request $request)
     {
     	$rules = [
-                'email' 		=> 'required',
-                'password' 		=> 'required'
+            'email' 		=> 'required',
+            'password' 		=> 'required'
         ];
 
     	$validator = Validator::make(
