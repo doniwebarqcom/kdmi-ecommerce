@@ -41,6 +41,14 @@ class DropshiperController extends CoreController
         ];
 
         $response = get_api_response('register/dropshiper', 'POST', [], $data_post);
-        dd($response);
+        if($response->code != 200)
+            return redirect()->route('dropshiper-register')->with('error-message', $response->message);
+        
+        return redirect()->route('succes-register-dropshier')->with('data', $response->data);
+    }
+
+    public function succes()
+    {
+        return view('dropshiper.succes');
     }
 }

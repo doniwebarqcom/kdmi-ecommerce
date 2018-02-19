@@ -20,7 +20,6 @@
 	display: none;
 }
 
-
 </style>
 
 <div class="boxed">

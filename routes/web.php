@@ -30,7 +30,6 @@ Route::post('registration/phone/completed', 'AuthController@registerPhone');
 
 Route::get('tes', 'TestController@index');
 
-
 Route::get('place/regency', 'PlaceController@regency');
 Route::get('place/district', 'PlaceController@district');
 Route::get('place/village', 'PlaceController@village');
@@ -48,5 +47,6 @@ Route::get('category/ajax', ['as' => 'ajax-category', 'uses' => 'ProductControll
 Route::get('product/succes-upload', ['as' => 'product-succes-input', 'uses' => 'ProductController@succesStore']);
 Route::get('criteria', ['uses' => 'ProductController@criteria']);
 
-Route::get('dropshiper/register', ['uses' => 'DropshiperController@register']);
+Route::get('dropshiper/register', ['as' => 'dropshiper-register','uses' => 'DropshiperController@register']);
+Route::get('dropshiper/register/succes', ['as' => 'succes-register-dropshier','uses' => 'DropshiperController@succes']);
 Route::post('dropshiper/register', ['uses' => 'DropshiperController@store']);

@@ -46,11 +46,16 @@ class KoprasiController extends CoreController
             'url'               => str_replace(" ", "", $request->nama_lengkap),
             'pickup_address'    => $request->alamat_pickup,
             'kode_pos'          => $request->alamat_pickup,
-            'postal_code'       => $request->kode_pos,
+            'postal_code'       => (int) $request->kode_pos,
+            'description'       => $request->description,
             'regency'           => (int) $request->regency,
             'image'             => $request->image,
         ];
 
         $response = get_api_response('shop/register', 'POST', [], $body);
+        if($response->code != 200)
+            return redirect()->route('register-koprasi')->with('error-message', $response->message);
+
+        return redirect()->route('home');
     }
 }

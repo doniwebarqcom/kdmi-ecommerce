@@ -42,11 +42,7 @@
 						<div class="form-register" style="height: auto !important;">
 							<form class="form-horizontal form-register box box-white box-shadow mb-30" id="register-form" name="form_reset" method="post" action="#">
 							<div class="text-center">
-								<h3 class="mb-0">Akun Anda Sudah Pernah Terdaftar</h3>
-								<hr>
-								<p>Anda sudah pernah melakukan pendaftaran akun dengan email <strong>{{ $input->email }}</strong>.<br>Silahkan login menggunakan akun anda atau <a class="green underline" href="">
-								klik di sini untuk mengganti kata sandi anda</a>.
-								</p>
+								<p>Selamat anda berhasil mendaftar sebagai dropshiper dan akun anda akan diverifikasi oleh admin secepatnya</p>
 							</div>
 						</form>
 						</div><!-- /.form-register -->
