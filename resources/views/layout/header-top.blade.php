@@ -39,7 +39,7 @@
                                     <li>
                                         <a href="shop-checkout.html" title="">Checkout</a>
                                     </li>
-                                    @if($user_data['have_shop'] == 1)
+                                    @if($user_data['shop'] !== null)
                                         <li>
                                             <a href=" {{ url('koprasi/'.$user_data['shop']->url) }}" title="">Koprasi Saya</a>
                                         </li>

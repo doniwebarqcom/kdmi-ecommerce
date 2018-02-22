@@ -13,348 +13,306 @@
 				<span></span>
 			</div>
 		</div><!-- /.preloader -->
-		
-        @include('layout.nav')
 
-		<section class="flat-breadcrumb">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="breadcrumbs">
-							<li class="trail-item">
-								<a href="#" title="">Home</a>
-								<span><img src="images/icons/arrow-right.png" alt=""></span>
-							</li>
-							<li class="trail-end">
-								<a href="#" title="">Registrasi</a>
-							</li>
-						</ul><!-- /.breacrumbs -->
-					</div><!-- /.col-md-12 -->
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</section><!-- /.flat-breadcrumb -->
-
-		<section class="flat-account background">
+		<section class="flat-account background" id="login">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6" style="margin: auto;">
-						<div class="form-register" style="height: auto !important;">
+						<div class="form-login" style="height: auto !important;padding: 20px !important">
 							<div class="title" style="margin-bottom: 0;">
 								<h3>Login Page</h3>
 							</div>
+							<hr/>
 							<br/>
-							
 
+							<div id="before-login">
 
-							{!! Form::open(['url' => 'login', 'method' => 'post'], ['accept-charset' => 'utf-8']) !!}
+								<div class="tab">
+									<button class="tablinks active" id='login_by_email' onclick="openCity(event, 'login-by-email')">Password Login</button>
+									<button class="tablinks" id='login_by_sms' onclick="openCity(event, 'login-by-sms')">SMS Login</button>
+								</div>
+								<!-- Tab content -->
+								<div id="login-by-email" class="tabcontent" style="display: block !important;">
+									{!! Form::open(['url' => 'login', 'method' => 'post', 'id' => 'formLogin'], ['accept-charset' => 'utf-8']) !!}
 
-								@if(session('message_error'))
-									<div id='message_error' class="form-box">
-										<p style="color: red">{{ session('message_error') }}</p>
-									</div>
-								@endIf
+										@if(isset($message_error))
+											<div class="isa_error">								   
+											   	@foreach($message_error as $key => $value)
+													<i class="fa fa-times-circle"><span style="font-size: 14px;margin-left: 3px"> {{ $value }} </span></i>
+											   	@endForeach
+											</div>
+										@endIf
 
-								<div class="form-box">
-									{{ Form::label('email', 'Username or email address * ', ['for' => 'email']) }}
-									{{ Form::text('email', '', ['id' => 'email', 'placeholder' => 'Email Or Username']) }}
+										@if(session('message_error'))
+											<div class="isa_error">
+												<i class="fa fa-times-circle"><span style="font-size: 14px;margin-left: 3px"> {{ session('message_error') }} </span></i>
+											</div>
+										@endIf
+
+										<div class="form-box">
+											{{ Form::label('email', 'email address * ', ['for' => 'email']) }}
+											{{ Form::text('email', '', ['id' => 'email', 'placeholder' => 'Email']) }}
+										</div>
+
+										<div class="form-box">
+											{{ Form::label('password', 'Password (*)', ['for' => 'password']) }}
+											{{ Form::password('password', ['id' => 'password', 'placeholder' => 'Password']) }}
+
+										</div>
+										<div class="form-box">
+											<button type="submit" class="login" style="background-color: #9d1818">Masuk</button>
+											<a href="#" title="">Lost your password?</a>
+										</div><!-- /.form-box -->
+
+									{!! Form::close() !!}
 								</div>
 
-								<div class="form-box">
-									{{ Form::label('password', 'Password (*)', ['for' => 'password']) }}
-									{{ Form::password('password', ['id' => 'password', 'placeholder' => 'Password']) }}
+								<div id="login-by-sms" class="tabcontent">													
+									{!! Form::open(['url' => 'login/phone', 'method' => 'post', 'id' => 'formLoginByPhone'], ['accept-charset' => 'utf-8']) !!}
+									<br/>									
 
+
+										<div class="form-box">
+											<div class="row">								  	
+											  	<div class="col-sm-8">
+											  		<div class="input-group">
+													    <span class="input-group-addon"><i>+62</i></span>
+													    {{ Form::text('phone', '', ['id' => 'phone', 'placeholder' => 'Masukan No Hp', 'class' => 'form-control']) }}
+													</div>													  
+											  	</div>
+											</div>
+										</div>
+
+										<div class="form-box">
+											<div class="row">
+											  	<div class="col-sm-5">
+											  		{{ Form::text('code', '', ['id' => 'code', 'placeholder' => 'Code']) }}
+											  	</div>
+											  	<div class="col-sm-5">
+											  		<button type="button" id="getCode" style="background-color: #9d1818;height: 40px;padding: 0px 35px;font-size: 10px;margin-right: 0px;">Kirim Kode SMS</button>
+											  	</div>											  	
+											</div>
+										</div>
+
+										<div class="form-box">
+											<button type="submit" class="login" id="sendCode" style="background-color: #9d1818;">Masuk</button>
+										</div><!-- /.form-box -->
+
+									{!! Form::close() !!}
 								</div>
-								<div class="form-box">
-									<button type="submit" class="login">Login</button>
-									<a href="#" title="">Lost your password?</a>
-								</div><!-- /.form-box -->
-
-							{!! Form::close() !!}						
-
-						</div><!-- /.form-register -->
+							</div>														
+						</div><!-- /.form-login -->
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-account -->
 
-		<section class="flat-row flat-iconbox style1 background">
+		<section class="flat-account background" id="completed_registration" style="display: none">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 col-lg-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/car.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Worldwide Shipping</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-6 col-lg-3 -->
-					<div class="col-md-6 col-lg-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/order.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Order Online Service</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-6 col-lg-3 -->
-					<div class="col-md-6 col-lg-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/payment.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Payment</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-6 col-lg-3 -->
-					<div class="col-md-6 col-lg-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/return.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Return 30 Days</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-6 col-lg-3 -->
+					<div class="col-md-6" style="margin: auto;">
+						<div class="form-login" style="height: auto !important;padding: 20px !important">
+							<div class="title" style="margin-bottom: 0;">
+								<h3>Complete the registration</h3>
+							</div>
+							<hr/>
+							<div>					
+								{!! Form::open(['url' => 'registration/phone/completed', 'method' => 'post', 'id' => 'formSendPassword'], ['accept-charset' => 'utf-8']) !!}
+									<br/>
+									<p>Nomor Anda <span id="no_phone"></span> belum terdaftar. Silahkan mengatur password untuk menyelesaikan proses registrasi.</p>
+									<div class="form-box">
+										{{ Form::password('password_phone', ['id' => 'password_phone', 'placeholder' => 'Silahkan mengatur password anda']) }}
+										{{ Form::hidden('code_send', '', array('id' => 'code_send')) }}
+										{{ Form::hidden('phone_send', '', array('id' => 'phone_send')) }}
+									</div>
+
+									<div class="form-box">
+										<button type="submit" class="login" style="background-color: #9d1818">Masuk</button>
+									</div><!-- /.form-box -->
+
+								{!! Form::close() !!}
+							</div>
+
+						</div>	
+					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->
-		</section><!-- /.flat-iconbox -->
+		</section><!-- /.flat-account -->
 
 		<footer>
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3 col-md-6">
-						<div class="widget-ft widget-about">
-							<div class="logo logo-ft">
-								<a href="index.html" title="">
-									<img src="images/logos/logo-ft.png" alt="">
-								</a>
-							</div><!-- /.logo-ft -->
-							<div class="widget-content">
-								<div class="icon">
-									<img src="images/icons/call.png" alt="">
-								</div>
-								<div class="info">
-									<p class="questions">Got Questions ? Call us 24/7!</p>
-									<p class="phone">Call Us: (888) 1234 56789</p>
-									<p class="address">
-										PO Box CT16122 Collins Street West, Victoria 8007,<br>Australia.
-									</p>
-								</div>
-							</div><!-- /.widget-content -->
-							<ul class="social-list">
-								<li>
-									<a href="#" title="">
-										<i class="fa fa-facebook" aria-hidden="true"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<i class="fa fa-twitter" aria-hidden="true"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<i class="fa fa-instagram" aria-hidden="true"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<i class="fa fa-pinterest" aria-hidden="true"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<i class="fa fa-dribbble" aria-hidden="true"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<i class="fa fa-google" aria-hidden="true"></i>
-									</a>
-								</li>
-							</ul><!-- /.social-list -->
-						</div><!-- /.widget-about -->
-					</div><!-- /.col-lg-3 col-md-6 -->
-					<div class="col-lg-3 col-md-6">
-						<div class="widget-ft widget-categories-ft">
-							<div class="widget-title">
-								<h3>Find By Categories</h3>
-							</div>
-							<ul class="cat-list-ft">
-								<li>
-									<a href="#" title="">Desktops</a>
-								</li>
-								<li>
-									<a href="#" title="">Laptops &amp; Notebooks</a>
-								</li>
-								<li>
-									<a href="#" title="">Components</a>
-								</li>
-								<li>
-									<a href="#" title="">Tablets</a>
-								</li>
-								<li>
-									<a href="#" title="">Software</a>
-								</li>
-								<li>
-									<a href="#" title="">Phones &amp; PDAs</a>
-								</li>
-								<li>
-									<a href="#" title="">Cameras</a>
-								</li>
-							</ul><!-- /.cat-list-ft -->
-						</div><!-- /.widget-categories-ft -->
-					</div><!-- /.col-lg-3 col-md-6 -->
-					<div class="col-lg-2 col-md-6">
-						<div class="widget-ft widget-menu">
-							<div class="widget-title">
-								<h3>Customer Care</h3>
-							</div>
-							<ul>
-								<li>
-									<a href="#" title="">
-										Contact us
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										Site Map
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										My Account
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										Wish List
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										Delivery Information
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										Privacy Policy
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										Terms &amp; Conditions
-									</a>
-								</li>
-							</ul>
-						</div><!-- /.widget-menu -->
-					</div><!-- /.col-lg-2 col-md-6 -->
-					<div class="col-lg-4 col-md-6">
-						<div class="widget-ft widget-newsletter">
-							<div class="widget-title">
-								<h3>Sign Up To New Letter</h3>
-							</div>
-							<p>Make sure that you never miss our interesting <br>
-								news by joining our newsletter program
-							</p>
-							<form action="#" class="subscribe-form" method="get" accept-charset="utf-8">
-								<div class="subscribe-content">
-									<input type="text" name="email" class="subscribe-email" placeholder="Your E-Mail">
-									<button type="submit"><img src="images/icons/right-2.png" alt=""></button>
-								</div>
-							</form><!-- /.subscribe-form -->
-							<ul class="pay-list">
-								<li>
-									<a href="#" title="">
-										<img src="images/logos/ft-01.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<img src="images/logos/ft-02.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<img src="images/logos/ft-03.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<img src="images/logos/ft-04.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="#" title="">
-										<img src="images/logos/ft-05.png" alt="">
-									</a>
-								</li>
-							</ul><!-- /.pay-list -->
-						</div><!-- /.widget-newsletter -->
-					</div><!-- /.col-lg-4 col-md-6 -->
-				</div><!-- /.row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="widget widget-apps">
-							<div class="widget-title">
-								<h3>Mobile Apps</h3>
-							</div>
-							<ul class="app-list">
-								<li class="app-store">
-									<a href="#" title="">
-										<div class="img">
-											<img src="images/icons/app-store.png" alt="">
-										</div>
-										<div class="text">
-											<h4>App Store</h4>
-											<p>Available now on the</p>
-										</div>
-									</a>
-								</li><!-- /.app-store -->
-								<li class="google-play">
-									<a href="#" title="">
-										<div class="img">
-											<img src="images/icons/google-play.png" alt="">
-										</div>
-										<div class="text">
-											<h4>Google Play</h4>
-											<p>Get in on</p>
-										</div>
-									</a>	
-								</li><!-- /.google-play -->
-							</ul><!-- /.app-list -->
-						</div><!-- /.widget-apps -->
-					</div><!-- /.col-md-12 -->
+					@include('layout.footer1')
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</footer><!-- /footer -->
+
+		@include('layout.footer-copyright')
 
 	</div>
 
 	<script type="text/javascript">
 		ready(function(){
-			var fade_out = function() {
-			  $("#message_error").fadeOut().empty();
-			}
+			$( "#login_by_email" ).addClass( "active" );			
 
-			setTimeout(fade_out, 2000);
+			$("#formLogin").validate({
+				rules: {
+					email: "required",
+					password: "required"
+				},
+				messages: {
+					email: "kolom harus diisi",
+					password: "kolom harus diisi"
+				}
+			});
+
+			$("#getCode").click(function(){
+								
+				$('#formLoginByPhone').validate({
+					rules: {
+						phone: {
+							required: true,
+				      		number: true
+						}
+					},
+					errorPlacement: function(error, element) {
+				       var n = element.attr("name");
+				       	if (n == "phone"){
+				       		element.attr("placeholder", "Harus diisi dan angka");
+				       		$("#phone").val("");
+				       	}
+				    },
+				    highlight: function(element) {
+						
+				        // add a class "has_error" to the element 
+				        $(element).addClass('has_error');
+				    },
+				    unhighlight: function(element) {
+						
+				        // remove the class "has_error" from the element 
+				        $(element).removeClass('has_error');
+				    }
+				});
+
+		        if ($('#formLoginByPhone').valid()) // check if form is valid
+		        {
+		        	$("#getCode").prop("disabled", true);
+					$("#getCode").css("background-color", "#ccc");
+					countdown(1);
+
+		            $.ajax({
+						type: "POST",
+						url: '{{ URL::to("generate/code") }}',
+						data : {
+							"_token": "{{ csrf_token() }}",
+							'phone' : "62"+$("#phone").val(),
+						},
+						dataType: 'json',
+						success: function(data){
+							var code = data.code;
+							if(code != '200')
+							{
+								// get error failed
+							}
+
+						}
+					});
+		        }		        				
+			});
+
+			 $('#sendCode').click(function(){
+
+		        $.ajax({
+					type: "POST",
+					url: '{{ URL::to("send/code/register") }}',
+					data : {
+						"_token": "{{ csrf_token() }}",
+						'phone' : "62"+$("#phone").val(),
+						'code' : $("#code").val(),
+					},
+					dataType: 'json',
+					success: function(data){						
+						var code = data.status;
+						if(data.status == '200')
+						{
+							if(data.member == 1)
+							{
+								window.location.replace('{{ URL::to("home") }}');
+							}else {
+								var phone = "62"+$("#phone").val();
+								var code = $("#code").val();
+								$("#phone_send").val(phone);
+								$("#code_send").val(code);
+								$("#no_phone").html(phone);
+								$("#login").hide();
+								$("#completed_registration").show();
+							}							
+						}
+					}
+				});
+
+		        return false;
+		    });
+
+			setTimeout(function() {
+			    $('.isa_error').fadeOut('slow');
+			}, 3000);
 		});
+
+		function countdown(minutes) {
+		    var seconds = 60;
+		    var mins = minutes
+		    function tick() {
+		        //This script expects an element with an ID = "counter". You can change that to what ever you want. 
+		        var counter = document.getElementById("getCode");
+		        var current_minutes = mins-1
+		        seconds--;
+		        counter.innerHTML = "Kirim Kode SMS " + current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+		        if( seconds < 1 ) {
+		            counter.innerHTML = "Kirim Kode SMS";
+		            $("#getCode").removeAttr('disabled');
+		            document.getElementById("getCode").style.backgroundColor = "#9d1818";
+		        }else if( seconds > 0 ) {
+		            setTimeout(tick, 1000);
+		        } else {
+		            if(mins > 1){
+		                countdown(mins-1);           
+		            }
+		        }
+		    }
+
+		    tick();
+		}
+
+		function openCity(evt, target) {
+		    // Declare all variables
+		    var i, tabcontent, tablinks;
+
+		    // Get all elements with class="tabcontent" and hide them
+		    tabcontent = document.getElementsByClassName("tabcontent");
+		    for (i = 0; i < tabcontent.length; i++) {
+		        tabcontent[i].style.display = "none";
+		    }
+
+		    // Get all elements with class="tablinks" and remove the class "active"
+		    tablinks = document.getElementsByClassName("tablinks");
+		    for (i = 0; i < tablinks.length; i++) {
+		        tablinks[i].className = tablinks[i].className.replace(" active", "");
+		    }
+
+		    // Show the current tab, and add an "active" class to the button that opened the tab
+		    document.getElementById(target).style.display = "block";
+		    evt.currentTarget.className += " active";
+		}
+
 	</script>
+
+	<style type="text/css">
+		input[readonly]
+		{
+		    background-color: #b0b0b0;
+		}
+
+		.has_error{ background: red !important;}
+	</style>
 @endsection

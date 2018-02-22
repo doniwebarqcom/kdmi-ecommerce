@@ -119,20 +119,7 @@ ready(function(){
 	  $("#message_error").fadeOut().empty();
 	}
 
-	setTimeout(fade_out, 2000);
-
-	// $("#addProduct").validate({
-	// 	rules: {
-	// 		nama_barang: "required",
-	// 		category: "required",
-	// 		deskripsi: "required"
-	// 	},
-	// 	messages: {
-	// 		nama_barang: "kolom harus diisi",
-	// 		category: "kolom harus dipilih",
-	// 		deskripsi: "kolom harus diisi"
-	// 	}
-	// });
+	setTimeout(fade_out, 2000);	
 
 	$("#grosir").click(function(){
 		var status_grosir = parseInt($("#status_grosir").val());

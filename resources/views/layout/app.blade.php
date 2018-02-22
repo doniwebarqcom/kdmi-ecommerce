@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/bootstrap.min.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=1') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=7') }}">
 
     <!-- Reponsive -->
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/responsive.css') }}">
