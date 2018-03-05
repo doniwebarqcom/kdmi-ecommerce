@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<html><!--<![endif]-->
 <head>
     <!-- Basic Page Needs -->
     <meta charset="UTF-8">
@@ -12,12 +12,14 @@
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Boostrap style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/bootstrap.min.css') }}">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
     <!-- Theme style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=7') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=15') }}">
 
     <!-- Reponsive -->
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/responsive.css') }}">
@@ -57,7 +59,7 @@
     
     <!-- <script type="text/javascript" src="javascript/jquery-ui.js"></script> -->
     <script type="text/javascript" src="{{ asset('javascript/jquery.mCustomScrollbar.js') }}"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+    
     <script type="text/javascript" src="{{ asset('javascript/gmap3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('javascript/waves.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('javascript/jquery.countdown.js') }}"></script>
@@ -68,11 +70,15 @@
     <script type="text/javascript" src="{{ asset('javascript/select2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('javascript/select2.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('javascript/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('javascript/main.js?v=1') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/jquery.uploadfile.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/jquery.maskMoney.min.js') }}" type="text/javascript"></script>
+    
+    
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/jquery-ui.css?v=123') }}">
+    <script type="text/javascript" src="{{ asset('javascript/jquery-ui.js?v=1') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
     (function() {

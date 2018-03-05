@@ -412,7 +412,7 @@
 	border:2px solid transparent;
 	position:relative;
 	z-index:99;
-	min-height:435px;
+	min-height:300px;
 	overflow:visible;
 }
 
@@ -500,7 +500,7 @@
 }
 
 .imagebox .box-content .product-name {
-	min-height:63px;
+	min-height:30px;
 	margin-top:6px;
 }
 
@@ -4780,7 +4780,6 @@ input[type="checkbox"]:checked + label:before {
 }
 
 .tecnical-specs table tr td:first-child {
-	width:120px;
 	font-weight:bold;
 	color:#484848;
 }
@@ -5100,7 +5099,7 @@ input[type="checkbox"]:checked + label:before {
 }
 
 .product-detail.style1 {
-	padding-top:66px;
+	/*padding-top:66px;*/
 }
 
 .product-detail.style1 > span {

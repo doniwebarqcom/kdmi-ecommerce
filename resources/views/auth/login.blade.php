@@ -76,7 +76,7 @@
 											<div class="row">								  	
 											  	<div class="col-sm-8">
 											  		<div class="input-group">
-													    <span class="input-group-addon"><i>+62</i></span>
+													    <span class="input-group-addon" style="width: 50px;"><i>+62</i></span>
 													    {{ Form::text('phone', '', ['id' => 'phone', 'placeholder' => 'Masukan No Hp', 'class' => 'form-control']) }}
 													</div>													  
 											  	</div>

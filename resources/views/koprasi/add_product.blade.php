@@ -70,7 +70,6 @@
 
 									<div class="form-box">
 										{{ Form::label('category', 'Category (*)', ['for' => 'nama_barang']) }}<br/>
-										<!-- {{ Form::select('category', [], ['id' => 'category', 'placeholder' => 'Category', 'class' => 'select-form']) }} -->
 										<select class="select-form" id="category" name="category"></select>
 										<select class="select-form" id="category2" name="category2"></select>
 										<select class="select-form" id="category3" name="category3"></select>
@@ -288,7 +287,7 @@
 										</div>
 										<div class="col-md-3">
 											{{ Form::label('stok', '', ['for' => 'stok']) }}
-											{{ Form::text('stok', 0, ['id' => 'stok', 'placeholder' => 'Stok', 'class' => 'currency']) }}
+											{{ Form::text('stok', 0, ['id' => 'stok', 'placeholder' => 'Stok', 'class' => 'currency', 'style' => 'height : 40px']) }}
 										</div>
 									</div>																
 									
@@ -297,6 +296,24 @@
 						</div><!-- /.row -->
 					</div><!-- /.container -->
 				</section><!-- /.flat-account -->			
+
+				<section class="flat-account background" style="padding-top: 10px">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-10" style="margin: auto;">
+								<div class="form-register" style="height: auto !important;padding-top: 10px">
+									<div class="title" style="margin-bottom: 0;">
+										<h4 align="lexft">Spesification Product</h4>
+									</div>
+									<hr/>							
+
+									<table id="table-spesification">
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
 				<section class="flat-account background" style="padding-top: 10px">
 					<div class="container">
@@ -326,9 +343,14 @@
 									</div>
 
 									<div class="form-box">
-										{{ Form::label('deskripsi', 'Deskripsi Produk', ['for' => 'deskripsi']) }}
-										{{ Form::textarea('deskripsi', "", ['id' => 'deskripsi']) }}
-									</div>								
+										{{ Form::label('deskripsi', 'Short deskripsi Produk', ['for' => 'deskripsi']) }}
+										{{ Form::textarea('deskripsi', "", ['id' => 'deskripsi', 'style' => 'height: 100px;width : 500px']) }}
+									</div>
+
+									<div class="form-box">
+										{{ Form::label('long_deskripsi', 'Long deskripsi Produk', ['for' => 'long_deskripsi']) }}
+										{{ Form::textarea('long_deskripsi', "", ['id' => 'long_deskripsi']) }}
+									</div>						
 
 									<div class="form-box">
 										<button type="submit" class="register">Simpan</button>									
@@ -418,5 +440,5 @@
 		}
 
 	</style>		
-       {!! Html::script('javascript/koprasi/content.js?v=1234555') !!}
+       {!! Html::script('javascript/koprasi/content.js?v=5') !!}
 @endsection

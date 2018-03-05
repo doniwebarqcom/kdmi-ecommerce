@@ -52,4 +52,14 @@ class PlaceController extends CoreController
         $district =  get_api_response('place/village', 'GET', [], $body);
         echo json_encode($district->data);
     }
+
+    public function postalcodeByDistrict()
+    {
+        $body = [
+            'district'   => $this->request->get('district')
+        ];
+
+        $district =  get_api_response('place/postal-code/district', 'GET', [], $body);
+        echo json_encode($district->data);   
+    }
 }

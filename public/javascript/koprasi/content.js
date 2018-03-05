@@ -17,7 +17,6 @@ ready(function(){
 
 		if(value > 0)
 		{
-
 			$.ajax({
 				type: "GET",
 				url: "criteria",
@@ -29,13 +28,12 @@ ready(function(){
 					var content = "";
 					$("#table-criteria").html("");
 					
-					
 					$.each( data, function( key, value ) {
 						content += "<tr>"+
-										"<td style='width:38%'>"+value.label+" </td>" +
-										"<td style='width:20px;' align='center'>:</td>"+
+										"<td style='width:50%'>"+value.label+" </td>" +
+										"<td style='width:10px;' align='center'>:</td>"+
 										"<td>" +
-											"<select style='margin-top: 10px;' class='select-noinline-form' id='criteria' name='criteria[1]'>"+
+											"<select style='margin-top: 10px;' class='select-noinline-form' id='criteria' name='criteria[]'>"+
 												"<option value=''>- Silahkan Pilih -</option>";
 
 						$.each( value.selection, function( subkey, subvalue ) {
@@ -46,6 +44,30 @@ ready(function(){
 					});
 
 					$("#table-criteria").prepend(content);
+				}
+			});
+
+			$.ajax({
+				type: "GET",
+				url: "spesification",
+				data : {
+					category : value
+				},
+				dataType: 'json',
+				success: function(data){
+					var content = "";
+					$("#table-spesification").html("");
+					
+					$.each( data, function( key, value ) {
+						content += "<tr>"+
+										"<td style='width:15%'>"+value.label+" </td>" +
+										"<td style='width:10px;' align='center'>:</td>"+
+										"<td>" +
+											"<div class='form-box'><input style='width:400px !important;' id='spesification' placeholder='Masukan Spesifikasi' class='text_input' name='spesification["+value.id+"]' type='text' value=''></div>"+
+										"</td></tr>";
+					});
+
+					$("#table-spesification").prepend(content);
 				}
 			});
 		}
@@ -199,7 +221,6 @@ ready(function(){
 		customProgressBar: function(obj, s)
         {
         	$("#addImage").html("");
-        	console.log(obj.responses);
         	$.each( obj.responses, function( key, value ) {		        		
 				$("#addImage").append("<input type='hidden' name='upload[]' value='"+value+"'>");
 			});

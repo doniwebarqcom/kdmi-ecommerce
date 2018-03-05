@@ -12,7 +12,7 @@
                     <div class="top-search">
                         <form action="#" method="get" class="form-search" accept-charset="utf-8">
                             <div class="cat-wrap">
-                                <select name="category">
+                                <select name="category" style="border: none">
                                     <option hidden value="">All Category</option>
                                     <option hidden value="">Cameras</option>
                                     <option hidden value="">Computer</option>

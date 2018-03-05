@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a79496789fc0376fe1642372a09a808",
+    "content-hash": "2b8bcf8c8a5189674c2907f1d23ef595",
     "packages": [
         {
             "name": "cloudinary/cloudinary_php",
@@ -1655,6 +1655,50 @@
                 "uuid"
             ],
             "time": "2018-01-20T00:28:24+00:00"
+        },
+        {
+            "name": "styde/blade-pagination",
+            "version": "5.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StydeNet/blade-pagination.git",
+                "reference": "727b3c0f5028a610b90231162e4a1beed80b8807"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StydeNet/blade-pagination/zipball/727b3c0f5028a610b90231162e4a1beed80b8807",
+                "reference": "727b3c0f5028a610b90231162e4a1beed80b8807",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Styde\\BladePagination\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Duilio Palacios",
+                    "email": "admin@styde.net",
+                    "homepage": "http://styde.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel's pagination with Blade templating support",
+            "homepage": "http://github.com/StydeNet/blade-pagination",
+            "keywords": [
+                "blade",
+                "pagination"
+            ],
+            "time": "2015-08-02T02:23:34+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4365,7 +4409,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "styde/blade-pagination": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

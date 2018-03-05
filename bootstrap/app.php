@@ -28,6 +28,7 @@ $app = new Illuminate\Foundation\Application(
 
 $app->register(Collective\Html\HtmlServiceProvider::class);
 $app->register(JD\Cloudder\CloudderServiceProvider::class);
+//$app->register(Styde\BladePagination\ServiceProvider::class);
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,

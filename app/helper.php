@@ -26,15 +26,28 @@ if (!function_exists('get_api_response')) {
             $res = json_decode($exception->getResponse()->getBody()->getContents());
          }  
       } catch (Exception $e) {
+          $result_respon  = [
+            'code'      => 400,
+            'error'     => true,
+            'message'   => ['error server'],
+            'data'      => null,
+            'pagging'   => null,
+            'meta'      => null,
+         ];
 
+         if(isset($result_respon['meta']->token))
+            Session::put('token', $result_respon['meta']->token);
+
+         return (object) $result_respon;
       }
 
       $result_respon  = [
-         'code'    => isset($res->status->code) ? $res->status->code : 200,
-         'error'   => isset($res->status->error) ? $res->status->error : false,
-         'message' => isset($res->status->message) ? $res->status->message : null,
-         'data'    => isset($res->data) ? $res->data : null,
-         'meta'    => isset($res->meta) ? $res->meta : null,
+         'code'      => isset($res->status->code) ? $res->status->code : 200,
+         'error'     => isset($res->status->error) ? $res->status->error : false,
+         'message'   => isset($res->status->message) ? $res->status->message : null,
+         'data'      => isset($res->data) ? $res->data : null,
+         'pagging'   => isset($res->paging) ? $res->paging : null,
+         'meta'      => isset($res->meta) ? $res->meta : null,
       ];
 
       if(isset($result_respon['meta']->token))
