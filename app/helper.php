@@ -56,3 +56,26 @@ if (!function_exists('get_api_response')) {
       return (object) $result_respon;
    }
 }
+
+if (!function_exists('resize_cloudinary')) {
+   function resize_cloudinary($url, $width = 100, $height = 100)
+   {
+      $url_cloud = env('URL_CLOUD');
+      $tmp_image = str_replace(Env('URL_CLOUD'), "", $url);
+      $image = Env('URL_CLOUD').'c_fit,h_'.$height.',w_'.$width.'/'.$tmp_image;
+      return $image;
+   }
+}
+
+if (!function_exists('parsing_url')) {
+   function parsing_url($url = null, $add_params = null)
+   {
+      if($add_params === null)
+         return $url;
+
+      if (strpos($url, '?') !== false)
+         return $url.'&'.$add_params;
+      else
+         return $url.'?'.$add_params;
+   }
+}

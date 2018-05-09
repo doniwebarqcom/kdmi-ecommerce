@@ -89,6 +89,12 @@ class UserController extends CoreController
         return view('user.edit_pickup_place', ['user_data' => $user_data, 'place_pickup' => $place_pickup->data ]);
     }
 
+    public function ajax_place_list()
+    {
+        $place_pickup = get_api_response('member/place/list');
+        return response()->json(['data'=> $place_pickup->data, 'code' => $place_pickup->code]);
+    }
+
     public function store_place(Request $request)
     {
         $data_post = [

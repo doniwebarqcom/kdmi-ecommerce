@@ -17,18 +17,28 @@ Route::get('home',[
     'uses' 	=> 'HomeController@index'
 ]);
 
-
+Route::get('tes', 'TestController@index');
 Route::get('register', 'RegisterController@index');
 Route::post('register', 'RegisterController@storeData');
+Route::get('banner')->uses('BannerController@ajax');
+
+Route::get('wishlist')->uses('WishlistController@index')->name('wishlist')->middleware('auth.member');
+Route::get('wishlist/add')->uses('WishlistController@add')->name('wishlist-add')->middleware('auth.member');
+Route::delete('wishlist')->uses('WishlistController@destroy')->name('wishlist-destroy')->middleware('auth.member');
+
+Route::get('k/{category}')->uses('ProductController@search');
 
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
+Route::get('before-login', ['as' => 'login', 'uses' => 'AuthController@before_login']);
 Route::post('login', 'AuthController@cek_login');
 Route::get('logout', 'AuthController@logout');
 Route::post('generate/code', 'AuthController@generaCode');
 Route::post('send/code/register', 'AuthController@sendCode');
-Route::post('registration/phone/completed', 'AuthController@registerPhone');
+Route::post('registration/phone/completed')->uses('AuthController@registerPhone');
 
-Route::get('tes', 'TestController@index');
+Route::post('get/shipping')->uses('ShippingController@getData');
+
+Route::get('checkout')->uses('CheckoutController@index')->name('checkout')->middleware('auth.member');
 
 Route::get('place/regency', 'PlaceController@regency');
 Route::get('place/district', 'PlaceController@district');
@@ -58,6 +68,7 @@ Route::get('koprasi/{url_koprasi}', 'KoprasiController@index')->middleware('have
 Route::get('my-account', 'UserController@account')->middleware('auth.member');
 Route::get('people/{id}/edit', 'UserController@edit')->middleware('auth.member');
 Route::get('my-account/place/list', 'UserController@place_list')->middleware('auth.member');
+Route::get('account/ajax/place/list', 'UserController@ajax_place_list');
 Route::get('my-account/profile', 'UserController@edit')->middleware('auth.member');
 Route::get('account/get/place', 'UserController@get_place')->middleware('auth.member');
 Route::post('account/edit/image', 'UserController@upload_image')->middleware('auth.member');
@@ -66,11 +77,20 @@ Route::post('account/place', 'UserController@store_place')->middleware('auth.mem
 Route::put('account/place', 'UserController@put_place')->middleware('auth.member');
 Route::delete('account/place', 'UserController@destroy_place')->middleware('auth.member');
 
-Route::get('cart', 'ProductController@cart')->middleware('auth.member');
-Route::get('product/{product}', 'ProductController@getDetail');
-Route::get('product/{product}/add-cart', 'ProductController@add_cart')->middleware('auth.member');
-Route::post('product/{product}/ajax-update-cart', 'ProductController@ajax_update_cart')->middleware('auth.member');
-Route::get('cart/ajax-cart', 'ProductController@ajax_cart')->middleware('auth.member');
-Route::delete('cart/ajax-cart', 'ProductController@destroy_cart')->middleware('auth.member');
+Route::get('product/{product}')->uses('ProductController@getDetail');
+Route::get('product/{product}/add-cart')->uses('ProductController@add_cart')->middleware('auth.member');
+Route::post('product/{product}/ajax-update-cart')->uses('ProductController@ajax_update_cart')->middleware('auth.member');
+
+Route::get('cart')->uses('CartController@list')->name('cart')->middleware('auth.member');
+Route::get('cart/ajax-cart')->uses('CartController@ajax_cart')->middleware('auth.member');
+Route::get('cart/ajax-cart-header')->uses('CartController@ajax_header');
+Route::delete('cart/ajax-cart')->uses('CartController@destroy_cart')->middleware('auth.member');
+Route::put('cart/ajax')->uses('CartController@ajax_update')->middleware('auth.member');
+Route::post('cart/store')->uses('CartController@store')->middleware('auth.member');
+Route::post('cart/store/with-new-place')->uses('CartController@storeWithNewPlace')->middleware('auth.member');
+
+Route::get('payment/edit_payment')->uses('PaymentController@editPayment')->name('edit-payment')->middleware('auth.member');
+Route::get('payment/tagihan')->uses('PaymentController@tagihan')->name('edit-payment')->middleware('auth.member');
+Route::post('payment/edit_payment')->uses('PaymentController@store_payment')->middleware('auth.member');
 
 Route::get('{koprasi}/{product}', 'ProductController@getSingle');

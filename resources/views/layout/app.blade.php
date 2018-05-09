@@ -19,7 +19,7 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
     <!-- Theme style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=15') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/style.css?v=21') }}">
 
     <!-- Reponsive -->
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/responsive.css') }}">
@@ -70,9 +70,9 @@
     <script type="text/javascript" src="{{ asset('javascript/select2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('javascript/select2.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('javascript/main.js?v=1') }}"></script>
+    <script type="text/javascript" src="{{ asset('javascript/main.js?v=17') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('javascript/jquery.uploadfile.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('javascript/jquery.uploadfile.min.js?v=4') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/jquery.maskMoney.min.js') }}" type="text/javascript"></script>
     

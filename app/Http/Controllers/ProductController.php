@@ -19,40 +19,48 @@ class ProductController extends CoreController
         return view('koprasi.add_product', ['user_data' => $user_data]);
     }
 
+    public function search($category, Request $request)
+    {
+        $body = [
+            'page'  => $request->page ? $request->page : 1
+        ];
+
+        $list_product = get_api_response('search/product/'.$category, 'GET', [], $body);
+        $user_data =  $this->getUserProfile();
+        $category =  get_api_response('category');
+        $categoryInSearch =  get_api_response('category-insearch');
+
+        $breadcrumb = array(
+            array("name" => 'Home', 'url' => 'home'),
+            array("name" => 'Category', 'url' => '#'),
+            array("name" => $request->segment(2), 'url' => '#'),
+        );
+        
+        return view('product.list_search', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging]);
+    }
+
     public function getDetail($product)
     {
         $user_data =  $this->getUserProfile();
         $product = get_api_response('product/'.$product);
-        return view('product.detail')->with(['product' => $product->data, 'user_data' => $user_data]);
+        $province = get_api_response('place/province');
+        return view('product.detail')->with(['product' => $product->data, 'user_data' => $user_data, 'province' => $province->data]);
     }
 
     public function getSingle($koprasi, $product)
     {
         $product = get_api_response($koprasi.'/'.$product);
         $user_data =  $this->getUserProfile();
-        if($response->code !== 200)
+        if($product->code !== 200)
             return redirect('/home');
 
         return view('product.single', ['product' => $product->data, 'user_data' => $user_data]);
-    }
-
-    public function cart()
-    {
-        $cart = get_api_response('cart');
-        $user_data =  $this->getUserProfile();
-        return view('product.cart', ['cart' => $cart->data, 'user_data' => $user_data]);
-    }
-
-    public function ajax_cart()
-    {
-        $cart = get_api_response('cart');
-        $returnHTML = view('cart.ajax_cart_view')->with('cart', $cart->data)->render();
-        return response()->json(array('success' => true, 'html'=>$returnHTML));   
-    }
+    }        
 
     public function add_cart($product)
     {    
         $response = get_api_response($product.'/add-cart', 'POST');
+        return redirect('cart');
     }
 
     public function ajax_update_cart($product, Request $request)
@@ -63,14 +71,6 @@ class ProductController extends CoreController
 
         $response = get_api_response($product.'/add-cart', 'POST', [], $body);
         return response()->json($response);
-    }
-
-    public function destroy_cart(Request $request)
-    {
-        $delete_cart = get_api_response('cart/'.$request->id, 'DELETE');
-        $cart = get_api_response('cart');
-        $returnHTML = view('cart.ajax_cart_view')->with('cart', $cart->data)->render();
-        return response()->json(array('success' => true, 'html'=>$returnHTML));
     }
 
     public function store(Request $request)

@@ -63,7 +63,7 @@
 							</div>						
 							<ul class="nav nav-tabs" style="margin-bottom: 30px;">
 							  	<li><a href="{{ URL::to('my-account/profile') }}">Biodata Diri</a></li>
-							  	<li><a href="">Koprasi</a></li>
+							  	<!-- <li><a href="">Koprasi</a></li> -->
 							  	<li class="active"><a href="">Daftar Alamat</a></li>
 							</ul>
 

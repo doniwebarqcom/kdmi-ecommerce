@@ -34,7 +34,7 @@
 								<!-- Tab content -->
 								<div id="login-by-email" class="tabcontent" style="display: block !important;">
 									{!! Form::open(['url' => 'login', 'method' => 'post', 'id' => 'formLogin'], ['accept-charset' => 'utf-8']) !!}
-
+										
 										@if(isset($message_error))
 											<div class="isa_error">								   
 											   	@foreach($message_error as $key => $value)

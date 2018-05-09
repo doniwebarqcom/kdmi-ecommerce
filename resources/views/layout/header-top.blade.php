@@ -42,16 +42,16 @@
                                 <a href="#" title="">My Account<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="unstyled">
                                     <li>
-                                        <a href="wishlist.html" title="">Wishlist</a>
+                                        <a href="{{ url('wishlist') }}" title="">Wishlist</a>
                                     </li>
                                     <li>
-                                        <a href="shop-cart.html" title="">My Cart</a>
+                                        <a href="{{ url('cart') }}" title="">My Cart</a>
                                     </li>
                                     <li>
                                         <a href="{{ url('my-account') }}" title="">My Account</a>
                                     </li>
                                     <li>
-                                        <a href="shop-checkout.html" title="">Checkout</a>
+                                        <a href="{{ url('checkout') }}" title="">Checkout</a>
                                     </li>                                    
                                     <li>
                                         <a href="{{ url('logout') }}" title="">Logout</a>

@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div id="logo" class="logo">
-                        <a href="index.html" title="">
+                        <a href='{{ URL::to("home") }}' title="">
                             <img src="{{ asset('images/kodami.png') }}" alt="">
                         </a>
                     </div><!-- /#logo -->
@@ -14,9 +14,6 @@
                             <div class="cat-wrap">
                                 <select name="category" style="border: none">
                                     <option hidden value="">All Category</option>
-                                    <option hidden value="">Cameras</option>
-                                    <option hidden value="">Computer</option>
-                                    <option hidden value="">Laptops</option>
                                 </select>
                                 <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                                 <div class="all-categories">
@@ -29,7 +26,7 @@
                                             @isset($categorySearch->sub_category)
                                             <ul>
                                                 @foreach ($categorySearch->sub_category as $sub)
-                                                    <li>{{ $sub->name }}</li>
+                                                   <a href="{{ url('k/'.$sub->permalink) }}" title=""> <li>{{ $sub->name }}</li> </a>
                                                 @endforeach
                                             </ul>
                                             @endisset
@@ -159,7 +156,7 @@
                                             @if( isset($categoryInSearch))
                                                 @foreach ($categoryInSearch as $categorySearch)
                                                 <li>
-                                                    <a href="{{ $categorySearch->url }}">{{ $categorySearch->fullname }}</a>
+                                                    <a href="{{ $categorySearch->permalink }}">{{ $categorySearch->fullname }}</a>
                                                 </li>                             
                                                 @endForeach
                                             @endIf
@@ -173,33 +170,32 @@
                 </div><!-- /.col-md-6 -->
                 <div class="col-md-3">
                     <div class="box-cart">
-                        <div class="inner-box">
-                            <ul class="menu-compare-wishlist">
-                                <li class="compare">
-                                    <a href="compare.html" title="">
-                                        <img src="http://grandetest.com/theme/techno-html/images/icons/compare.png" alt="">
-                                    </a>
-                                </li>
-                                <li class="wishlist">
-                                    <a href="wishlist.html" title="">
-                                        <img src="http://grandetest.com/theme/techno-html/images/icons/wishlist.png" alt="">
-                                    </a>
-                                </li>
-                            </ul><!-- /.menu-compare-wishlist -->
-                        </div><!-- /.inner-box -->
-                        <div class="inner-box">
+                        <div id="inner-box" class="inner-box">
                             <a href="#" title="">
                                 <div class="icon-cart">
-                                    <img src="http://grandetest.com/theme/techno-html/images/icons/cart.png" alt="">
-                                    <!--<span>4</span>-->
+                                    <img src="{{ asset('images/icons/cart.png') }}" alt="">
                                 </div>
                                 <div class="price">
-                                    Rp. 0
+                                    0
                                 </div>
-                            </a>                            
+                            </a>                   
                         </div><!-- /.inner-box -->
                     </div><!-- /.box-cart -->
                 </div><!-- /.col-md-3 -->
             </div><!-- /.row -->
         </div><!-- /.container -->
     </div><!-- /.header-middle -->
+
+    <script type="text/javascript">
+        ready(function(){
+            $.ajax({
+                type: "GET",
+                url: '{{ URL::to("cart/ajax-cart-header") }}',
+                dataType: 'json',
+                success: function(data){               
+                    if(data.count > 0)
+                        $("#inner-box").html(data.html);
+                }
+            });
+        });        
+    </script>

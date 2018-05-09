@@ -4,6 +4,14 @@
 
 @section('content')
 
+<style type="text/css">
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button { 
+	  -webkit-appearance: none; 
+	  margin: 0; 
+	}
+</style>
+
 <div class="boxed">
 		<div class="overlay" style="opacity: 0; display: none;"></div>
 
@@ -14,26 +22,9 @@
 			</div>
 		</div><!-- /.preloader -->
 		
-		<section class="flat-breadcrumb">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-11">
-						<ul class="breadcrumbs">
-							<li class="trail-item">
-								<a href="#" title="">Home</a>
-								<span><img src="images/icons/arrow-right.png" alt=""></span>
-							</li>
-							<li class="trail-end">
-								<a href="#" title="">Registrasi</a>
-							</li>
-						</ul><!-- /.breacrumbs -->
-					</div><!-- /.col-md-12 -->
-					<div class="col-md-1">
-						<a href="login"><button type="button" class="btn btn-default">Masuk</button></a>
-					</div>
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</section><!-- /.flat-breadcrumb -->
+        @include('layout.nav')
+
+        @include('layout.breadcrumb')
 
 		<section class="flat-account background">
 			<div class="container">
@@ -42,10 +33,10 @@
 						<div class="form-register" style="height: auto !important;">
 							<form class="form-horizontal form-register box box-white box-shadow mb-30" id="register-form" name="form_reset" method="post" action="#">
 							<div class="text-center">
-								<h3 class="mb-0">Akun Anda Sudah Pernah Terdaftar</h3>
+								<h3 class="mb-0">Keranjang Kosong</h3>
 								<hr>
-								<p>Anda sudah pernah melakukan pendaftaran akun dengan email <strong>{{ $input->email }}</strong>.<br>Silahkan login menggunakan akun anda atau <a class="green underline" href="">
-								klik di sini untuk mengganti kata sandi anda</a>.
+								<p>
+									Keranjang Belanja anda kosong silahkan pilih product yang anda ingin beli yang tersedia di dalam E-commerce Kodami
 								</p>
 							</div>
 						</form>
@@ -61,8 +52,8 @@
 					@include('layout.footer1')		
 				</div><!-- /.row -->
 			</div><!-- /.container -->
-		</footer><!-- /footer -->
-
+		</footer><!-- /footer -->		
 		@include('layout.footer-copyright')
-	</div>	
+	</div>
 @endsection
+

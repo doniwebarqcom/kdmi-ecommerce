@@ -46,7 +46,7 @@
 -------------------------------------------------------------- */
 .flat-slider {
 	padding:35px 0 14px;
-	background-color:#f5f5f5;
+	background-color:#fff;
 }
 
 .flat-slider.style2 {
@@ -2137,7 +2137,6 @@ ul.flat-infomation.style1 li img {
 	content:'';
 	position:absolute;
 	width:92px;
-	background-color:#ffc576;
 	height:200%;
 	top:0px;
 	right:273px;
@@ -2217,7 +2216,7 @@ ul.flat-infomation.style1 li img {
 
 /* Slider Item Style3 */
 .owl-carousel .owl-controls {
-	background-color:#f5f5f5;
+	background-color:#fff;
 }
 
 .slider .slider-item.style3 .item-text {

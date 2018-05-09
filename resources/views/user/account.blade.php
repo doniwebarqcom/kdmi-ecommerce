@@ -56,6 +56,8 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-product-detail -->
 		
+		@if(isset($user_data['shop']))
+
 		<section style="margin-top: 10px">
 			<div class="container">
 				<div class="row">
@@ -74,7 +76,9 @@
 					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
+
+		@endIf
 
 		<footer>
 			<div class="container">

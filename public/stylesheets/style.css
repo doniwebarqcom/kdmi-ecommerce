@@ -8,7 +8,7 @@
 @import url("font-awesome.css");
 @import url("flexslider.css");
 @import url("owl.carousel.css");
-@import url("shortcodes.css");
+@import url("shortcodes.css?v=2");
 @import url("jquery-ui.css");
 @import url("waves.min.css");
 @import url("mCustomScrollbar.css");
@@ -1249,7 +1249,7 @@ ul.flat-unstyled li > ul > li > a {
 
 /* Header Bottom */
 .header-bottom {
-	background-color:#232f3f;
+	/*background-color:#232f3f;*/
 }
 
 .header-bottom > .container > .row {
@@ -3664,4 +3664,16 @@ ol.comment-list li.comment .comment-text .comment-content p {
 
 .svg-photo-profile{
 	fill: white;
+}
+
+.no-radius {
+	border-radius: 0px !important;
+}
+
+.with-cursor{
+	cursor: pointer
+}
+
+.wishlist{
+	cursor: pointer;
 }

@@ -41,14 +41,26 @@ class AuthController extends Controller
 		$message = $response->message;
 		$error = $response->error;
 		if($code != 200 OR $error)
-        	return view('auth.login', ['message_error' => $message]);
+        	return view('auth.login', ['message_error' => [$message]]);
 
 		Session::put('token', $response->meta->token);
         $page = $request->cookie('page');
+
         if(is_null($page))
             $page = 'home';
 
-		return redirect()->route($page);
+        return redirect($page);
+    }
+
+    public function before_login(Request $request)
+    {
+        $page = isset($_GET['page']) ? $_GET['page'] : false;
+        if($page)
+        {
+            cookie('page', $page, 60);
+        }
+        
+        return redirect('login');
     }
 
     public function logout(Request $request)

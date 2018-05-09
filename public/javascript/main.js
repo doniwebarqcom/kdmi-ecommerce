@@ -715,32 +715,7 @@
                 }
             });
         };// slide Product s8
-
-        var CountDown = function() {
-            var before = '<div class="square"><div class="numb">',
-                textday = '</div><div class="text">DAYS',
-                texthour = '</div><div class="text">HOURS',
-                textmin = '</div><div class="text">MINS',
-                textsec = '</div><div class="text">SECS';
-                if ($().countdown) {
-                    $(".count-down").countdown('2017/12/20', function(event) {
-                      $(this).html(event.strftime(before + '%D' + textday + '</div></div>' + before + '%H' + texthour + '</div></div>' + before + '%M' + textmin + '</div></div>' + before + '%S' + textsec + '</div>'));
-                    });
-                }
-        }; // Count Down
-
-        var CountDown_s2 = function() {
-            var before = '<div class="square"><div class="numb">',
-                textday = '</div><div class="text">DAYS',
-                texthour = '</div><div class="text">HOURS',
-                textsec = '</div><div class="text">SECS';
-                if ($().countdown) {
-                    $(".counter.style1.v1 .counter-content .count-down").countdown('2017/12/20', function(event) {
-                      $(this).html(event.strftime(before + '%D' + textday + '</div></div>' + before + '%H' + texthour + '</div></div>' + before + '%S' + textsec + '</div>'));
-                    });
-                }
-        }; // Count Down
-
+       
         var tabImagebox = function() {
             var speed = 1000;
             $('.flat-imagebox').each(function() {
@@ -1234,8 +1209,6 @@
         slideProduct_s7();
         slideProduct_s8();
         slideTestimonial();
-        CountDown();
-        CountDown_s2();
         tabImagebox();
         tabImagebox_s2();
         tabProductDetail();
@@ -1267,5 +1240,37 @@
         popup();
         removePreloader();
     });
+
+    Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
+        var n = this,
+            decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+            decSeparator = decSeparator == undefined ? "." : decSeparator,
+            thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+            sign = n < 0 ? "-" : "",
+            i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+            j = (j = i.length) > 3 ? j % 3 : 0;
+            
+            return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+    };
+
+    $(".wishlist-product").click(function(){
+        var id = $(this).data('id');
+        var url =  window.location.origin+"/wishlist/add";
+        $.ajax({
+                type: 'GET',
+                url: url,
+                data : {
+                    "id" : id
+                },
+                dataType: 'json',
+                success: function(data){
+                    if(data === 200)
+                       alert('success add wishlist')
+                    else
+                        alert('something error at add wishlist');
+                }
+
+            });
+    });    
 
 })(jQuery);

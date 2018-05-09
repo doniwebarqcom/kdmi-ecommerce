@@ -29,15 +29,14 @@
 		<section class="flat-shop-cart">
 			<div class="container">
 				<div class="row">
+					
 					<div class="col-lg-9">
 						<div class="flat-row-title style1">
 							<h3>Shopping Cart</h3>
 						</div>
 						<div class="table-cart">
 							
-							<div id="table-cart">
-								
-							</div>
+							@include('cart.ajax_cart_view')
 							
 							<div class="form-coupon">
 								<form action="#" method="get" accept-charset="utf-8">
@@ -49,6 +48,7 @@
 							</div><!-- /.form-coupon -->
 						</div><!-- /.table-cart -->
 					</div><!-- /.col-lg-8 -->
+
 					<div class="col-lg-3">
 						<div class="cart-totals">
 							<h3>Cart Totals</h3>
@@ -61,19 +61,10 @@
 										</tr>
 										<tr>
 											<td>Shipping</td>
-											<td class="btn-radio">
-												<div class="radio-info">
-													<input type="radio" id="flat-rate" checked name="radio-flat-rate">
-													<label for="flat-rate">Flat Rate: <span>$3.00</span></label>
-												</div>
-												<div class="radio-info">
-													<input type="radio" id="free-shipping" name="radio-flat-rate">
-													<label for="free-shipping">Free Shipping</label>
-												</div>
-												<div class="btn-shipping">
-													<a href="#" title="">Calculate Shipping</a>
-												</div>
-											</td><!-- /.btn-radio -->
+											<td id="shipping">
+												<span id='shipping-label'>0</span> 
+												<input type="hidden" name="shipping" id="val-shipping">
+											</td>											
 										</tr>
 										<tr>
 											<td>Total</td>
@@ -85,11 +76,13 @@
 									</tbody>
 								</table>
 								<div class="btn-cart-totals">
-									<a href="#" class="checkout" title="">Checkout</a>
+									<a href="{{ url('checkout') }}" class="checkout" title="">Checkout</a>
 								</div><!-- /.btn-cart-totals -->
 							</form><!-- /form -->
 						</div><!-- /.cart-totals -->
 					</div><!-- /.col-lg-4 -->
+
+
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-shop-cart -->
@@ -159,21 +152,7 @@
 					@include('layout.footer1')		
 				</div><!-- /.row -->
 			</div><!-- /.container -->
-		</footer><!-- /footer -->
-		
-		<script type="text/javascript">
-			ready(function(){				
-				$.ajax({
-					type: "GET",
-					url: '{{ URL::to("cart/ajax-cart") }}',
-					dataType: 'json',
-					success: function(data){
-						$("#table-cart").html(data.html);
-					}
-				});
-			});
-		</script>
-		
+		</footer><!-- /footer -->		
 		@include('layout.footer-copyright')
 	</div>
 @endsection

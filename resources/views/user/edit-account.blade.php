@@ -43,14 +43,20 @@
 
 							<ul class="nav nav-tabs" style="margin-bottom: 30px;">
 							  	<li class="active"><a href="#">Biodata</a></li>
-							  	<li><a href="">Koprasi</a></li>
+							  	<!-- <li><a href="">Koprasi</a></li> -->
 							  	<li><a href="{{ URL::to('my-account/place/list') }}">Daftar Alamat</a></li>							  	
 							</ul>
 
 							<div class="row">
 								{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'edit-account'], ['accept-charset' => 'utf-8']) !!}
 								<div class="col-sm-4" style="border:1px solid rgba(0,0,0,.15); ">
-									<img  src="{{ $user_data['image'] }}"  style="margin-left: auto; margin-right: auto; margin-top: 10px"><br/><br/>
+									<img width="344px" height="201px"  src="
+									@if(strlen($user_data['image']) > 0)
+									 	{{ $user_data['image'] }}
+									@else
+										{{ asset('images/Default-avatar.jpg') }}
+									@endIf"  style="margin-left: auto; margin-right: auto; margin-top: 10px">
+									<br/><br/>
 									<div id="mydiv" style="display: none">
   										<img src="{{ asset('images/35.gif') }}" class="ajax-loader">
 									</div>
@@ -60,7 +66,7 @@
 								</div>
 
 								<div class="col-sm-8">
-									<h5 align="left"><strong>Ubah Biodata Diri</strong></h5>
+									<h5 align="left"><strong>Ubah Biodata Diri</strong></h5><br/>
 									
 									<div class="row fs-10">
 										<div class="col-sm-2">
@@ -79,17 +85,35 @@
 										</div>
 										<div class="col-sm-3">
 											<div class="form-box">
-												{{ Form::select('day', $date_day, $date[2],['id' => 'day', 'style' => 'height: 33px; padding-top : 3px']) }}
+												<?php 
+													if(isset($date[2]))
+														$date2 = $date[2];
+													else
+														$date2 = 0;
+												?>
+												{{ Form::select('day', $date_day, $date2,['id' => 'day', 'style' => 'height: 33px; padding-top : 3px']) }}
 											</div>
 										</div>
 										<div class="col-sm-4">
 											<div class="form-box">
-												{{ Form::select('month', $date_month, $date[1],['id' => 'month', 'style' => 'height: 33px; padding-top : 3px']) }}
+												<?php 
+													if(isset($date[1]))
+														$date1 = $date[1];
+													else
+														$date1 = 0;
+												?>
+												{{ Form::select('month', $date_month, $date1,['id' => 'month', 'style' => 'height: 33px; padding-top : 3px']) }}
 											</div>
 										</div>
 										<div class="col-sm-3">
 											<div class="form-box">
-												{{ Form::select('year', $date_year, $date[0],['id' => 'year', 'style' => 'height: 33px; padding-top : 3px']) }}
+												<?php 
+													if(isset($date[0]))
+														$date0 = $date[0];
+													else
+														$date0 = 0;
+												?>
+												{{ Form::select('year', $date_year, $date0,['id' => 'year', 'style' => 'height: 33px; padding-top : 3px']) }}
 											</div>
 										</div>
 									</div>
