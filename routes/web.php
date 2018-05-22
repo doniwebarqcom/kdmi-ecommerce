@@ -17,6 +17,8 @@ Route::get('home',[
     'uses' 	=> 'HomeController@index'
 ]);
 
+Route::get('ajax/get-pulsa', 'AjaxController@getPulsaGet');
+
 Route::get('tes', 'TestController@index');
 Route::get('register', 'RegisterController@index');
 Route::post('register', 'RegisterController@storeData');

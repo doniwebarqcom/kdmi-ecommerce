@@ -73,9 +73,10 @@
     <script type="text/javascript" src="{{ asset('javascript/main.js?v=17') }}"></script>
 
     <script type="text/javascript" src="{{ asset('javascript/jquery.uploadfile.min.js?v=4') }}"></script>
-
     <script type="text/javascript" src="{{ asset('javascript/jquery.maskMoney.min.js') }}" type="text/javascript"></script>
-    
+        
+    <script type="text/javascript" src="{{ asset('javascript/jssor.slider.min.js') }}"></script>
+
     
     <link rel="stylesheet" type="text/css" href="{{ asset('stylesheets/jquery-ui.css?v=123') }}">
     <script type="text/javascript" src="{{ asset('javascript/jquery-ui.js?v=1') }}" type="text/javascript"></script>

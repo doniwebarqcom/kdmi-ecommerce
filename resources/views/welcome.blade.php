@@ -9,14 +9,14 @@
         @include('layout.nav')
                 
         @include('home.banner-slideshow')
-
+    
         <!-- @ include('home.special-offer') -->
 
-        @include('home.ads')
+        <!-- @ include('home.ads') -->
             
         <!-- @ include('home.category') -->
 
-        @include('home.our-product')
+        <!-- @ include('home.our-product') -->
 
         <!-- @ include('home.most-viewed') -->
 
