@@ -12,7 +12,7 @@
     
         <!-- @ include('home.special-offer') -->
 
-        <!-- @ include('home.ads') -->
+        @include('home.ads')
             
         <!-- @ include('home.category') -->
 

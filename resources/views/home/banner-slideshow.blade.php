@@ -45,6 +45,8 @@
             height:  588px !important;*/
             
         }
+
+        
         </style>
 
         <section class="flat-row flat-slider">
@@ -110,8 +112,8 @@
 
                             <div style="background: #fff;   border: 1px solid #ccc; border-bottom: none;" class="tab">
                                 <ul style="margin-left: 10px; margin-top: 10px; width: 95%"  class="nav nav-tabs">
-                                    <li id="pulsa_tab" style="width: 50%" class="tablinks active"><a onclick="openCity(event, 'pulsa')" align='center' href="#"><strong> Pulsa </strong></a></li>
-                                    <li id="listrik_tab" style="width: 50%" class="tablinks"><a onclick="openCity(event, 'listrik')" align='center' href="#"><strong>Listrik</strong></a></li>
+                                    <li id="pulsa_tab" style="width: 50%" class="tablinks active"><a onclick="openCity(event, 'pulsa')" style="cursor: pointer;" align='center'><strong> Pulsa </strong></a></li>
+                                    <li id="listrik_tab" style="width: 50%" class="tablinks"><a onclick="openCity(event, 'listrik')" style="cursor: pointer;" align='center'><strong>Listrik</strong></a></li>
                                 </ul>
                             </div>
 
