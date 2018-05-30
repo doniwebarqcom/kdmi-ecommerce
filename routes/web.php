@@ -17,6 +17,9 @@ Route::get('home',[
     'uses' 	=> 'HomeController@index'
 ]);
 
+
+Route::get('suggest/product')->uses('ProductController@suggest');
+
 Route::get('ajax/get-pulsa', 'AjaxController@getPulsaGet');
 
 Route::get('tes', 'TestController@index');
@@ -29,6 +32,7 @@ Route::get('wishlist/add')->uses('WishlistController@add')->name('wishlist-add')
 Route::delete('wishlist')->uses('WishlistController@destroy')->name('wishlist-destroy')->middleware('auth.member');
 
 Route::get('k/{category}')->uses('ProductController@search');
+
 
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::get('before-login', ['as' => 'login', 'uses' => 'AuthController@before_login']);

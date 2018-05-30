@@ -19,6 +19,14 @@ class ProductController extends CoreController
         return view('koprasi.add_product', ['user_data' => $user_data]);
     }
 
+    public function suggest(Request $request)
+    {
+        $category = $request->get('category') ? (int) $request->get('category') : 0;
+        $response = get_api_response('suggest/product', 'GET', [], ['category' => $category]);
+
+        return $response->data;
+    }
+
     public function search($category, Request $request)
     {
         $body = [
@@ -77,7 +85,7 @@ class ProductController extends CoreController
     {        
         $user_data =  $this->getUserProfile();
         $description = $request->deskripsi;
-        $long_description = $request->long_deskripsi ? $request->long_deskripsi : " ";
+        $long_description = $request->long_deskripsi ? $request->long_deskripsi : "";
         $price = str_replace(",", "", $request->harga_barang);
         $price = str_replace(".", "", $price);
         $weight = str_replace(",", "", $request->berat_barang);
@@ -101,6 +109,7 @@ class ProductController extends CoreController
         $grosir_dari = $request->jumlah_ke ? $request->jumlah_ke : [];
         $grosir_sampai = $request->jumlah_sampai ? $request->jumlah_sampai : [];
         $grosir_harga = $request->harga_grosir ? $request->harga_grosir : [];
+        $suggest_kodami_product = $request->suggest_product ? $request->suggest_product : "";
 
         array_shift($real_upload);
         $result_criteria = [];
@@ -127,28 +136,29 @@ class ProductController extends CoreController
         }
         
         $body = array(
-            'category'          => (int) $category,
-            'name'              => $nama_barang,
-            'description'       => $description,
-            'long_description'  => $long_description,
-            'price'             => (int) $price,
-            'discont'           => (double) $discont,
-            'discont_anggota'   => (double) $discont_anggota,
-            'primary_image'     => $primary_image,
-            'avaible'           => $avaible,
-            'weight'            => (int) $weight,
-            'stock'             => (int) $stock,
-            'new'               => $new,
-            'images'            => $real_upload,
-            'criterias'         => $result_criteria,
-            'spesification'     => $result_spesification,
-            'grosir_start'      => $result_start,
-            'grosir_until'      => $result_until,
-            'grosir_price'      => $result_price,
+            'category'                  => (int) $category,
+            'name'                      => $nama_barang,
+            'description'               => $description,
+            'long_description'          => $long_description,
+            'price'                     => (int) $price,
+            'discont'                   => (double) $discont,
+            'discont_anggota'           => (double) $discont_anggota,
+            'primary_image'             => $primary_image,
+            'avaible'                   => $avaible,
+            'weight'                    => (int) $weight,
+            'stock'                     => (int) $stock,
+            'new'                       => $new,
+            'images'                    => $real_upload,
+            'criterias'                 => $result_criteria,
+            'spesification'             => $result_spesification,
+            'grosir_start'              => $result_start,
+            'grosir_until'              => $result_until,
+            'grosir_price'              => $result_price,
+            'suggest_kodami_product'    => $suggest_kodami_product,
         );
 
         $response = get_api_response('product/input', 'POST', [], $body);
-
+        
         $url = 'koprasi/'.$user_data['shop']->url;
         if($response->code == 200)
             return redirect($url);

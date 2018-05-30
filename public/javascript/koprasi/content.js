@@ -46,6 +46,23 @@ ready(function(){
 					$("#table-criteria").prepend(content);
 				}
 			});
+			
+			$.ajax({
+				type: "GET",
+				url: "suggest/product",
+				data : {
+					category : value
+				},
+				dataType: 'json',
+				success: function(data){
+					var content = "";
+					$("#suggest_product").html("<option value='0'>--Silahkan Pilih--</option>");
+					
+					$.each( data, function( key, value ) {						
+						$("#suggest_product").append("<option value='"+value.id+"'>"+value.name+"</option>");
+					});
+				}
+			});
 
 			$.ajax({
 				type: "GET",

@@ -10,7 +10,9 @@ class CheckoutController extends Controller
 {
 	public function index(Request $request)
 	{
+
 		$cart = get_api_response('cart');
+
 		
 		if($cart->data === 0)
 			return view('cart.empty');
@@ -19,5 +21,7 @@ class CheckoutController extends Controller
 
 		if($checkout->code === 200)
 			return redirect('payment/edit_payment');
+		else
+			return redirect('home');
 	}
 }

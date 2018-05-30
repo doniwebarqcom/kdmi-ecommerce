@@ -10,15 +10,15 @@
                 
         @include('home.banner-slideshow')
     
-        <!-- @ include('home.special-offer') -->
+        @include('home.special-offer')
 
         @include('home.ads')
             
-        <!-- @ include('home.category') -->
+        @include('home.category')
 
-        <!-- @ include('home.our-product') -->
+        @include('home.our-product')
 
-        <!-- @ include('home.most-viewed') -->
+        @include('home.most-viewed')
 
         <footer>
             <div class="container">

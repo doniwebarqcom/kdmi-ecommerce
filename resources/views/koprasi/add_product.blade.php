@@ -69,10 +69,15 @@
 									</div>
 
 									<div class="form-box">
-										{{ Form::label('category', 'Category (*)', ['for' => 'nama_barang']) }}<br/>
+										{{ Form::label('category', 'Category (*)', ['for' => 'category']) }}<br/>
 										<select class="select-form" id="category" name="category"></select>
 										<select class="select-form" id="category2" name="category2"></select>
 										<select class="select-form" id="category3" name="category3"></select>
+									</div><br/>
+
+									<div class="form-box" style="margin-top: 20px">
+										{{ Form::label('suggest_category', 'Suggest Product (*)', ['for' => 'suggest_product']) }}<br/>
+										<select class="select-form" style="width: 300px" id="suggest_product" name="suggest_product"><option value="0">-- Silahkan Pilih --</option></select>
 									</div>
 																	
 								</div><!-- /.form-register -->
@@ -440,5 +445,5 @@
 		}
 
 	</style>		
-       {!! Html::script('javascript/koprasi/content.js?v=5') !!}
+       {!! Html::script('javascript/koprasi/content.js?v=6') !!}
 @endsection
