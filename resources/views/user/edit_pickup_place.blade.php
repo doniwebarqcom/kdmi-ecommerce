@@ -53,65 +53,64 @@
 		</section><!-- /#header -->
 
 		@include('layout.breadcrumb')		
-		<section class="flat-account background" id="login">
-			<div class="container">
-				<div class="row" style="color: black">
-					<div class="col-md-12" style="margin: auto;">
-						<div class="container-backgroud-white" style="height: auto !important;padding: 20px !important;">
-							<div class="title" style="margin-bottom: 20px;">
-								<h2 align="left"><i class="glyphicon glyphicon glyphicon-user"></i> {{ $user_data['name'] }}</h2>
-							</div>						
-							<ul class="nav nav-tabs" style="margin-bottom: 30px;">
-							  	<li><a href="{{ URL::to('my-account/profile') }}">Biodata Diri</a></li>
-							  	<!-- <li><a href="">Koprasi</a></li> -->
-							  	<li class="active"><a href="">Daftar Alamat</a></li>
-							</ul>
+		<section>
+			@include('user.sidebar')
 
-							<button style="height: 40px; font-size: 15px; background-color: #9d1818" type="button" class="btn btn-info btn-lg" id="add-place" data-toggle="modal" data-target="#myModal">+ Tambah Alamat</button>
+			<div class="row" style="color: black">
+				<div class="col-md-10 ruler-sidebar">
+					<div style="height: auto !important;padding: 20px !important;">
+						<div class="title" style="margin-bottom: 20px;">
+							<h2 align="left"><i class="glyphicon glyphicon glyphicon-user"></i> {{ $user_data['name'] }}</h2>
+						</div>						
+						<ul class="nav nav-tabs" style="margin-bottom: 30px;">
+						  	<li><a href="{{ URL::to('profile/edit') }}">Biodata Diri</a></li>
+						  	<li class="active"><a href="">Daftar Alamat</a></li>
+						</ul>
 
-							{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'edit-account-place'], ['accept-charset' => 'utf-8']) !!}
+						<button style="height: 40px; font-size: 15px; background-color: #9d1818" type="button" class="btn btn-info btn-lg" id="add-place" data-toggle="modal" data-target="#myModal">+ Tambah Alamat</button>
 
-							<div id="list_pickup">								
-								<table class="table table-responsive">
-									<thead>
-										<tr>
-											<th>Penerima</th>
-											<th>Alamat Pengiriman</th>
-											<th>Daerah pengiriman</th>
-										</tr>
-									</thead>
-									<tbody>
+						{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'edit-account-place'], ['accept-charset' => 'utf-8']) !!}
 
-										@if(count($place_pickup) > 0)
-											@foreach($place_pickup as $key => $value)
-												<tr>
-													<td style="">
-														<strong> {{ $value->recipient_name}} </strong> <br />
-														{{ $value->phone_number_recipient}}
-													</td>
-													<td style="">
-														<strong> {{ $value->place_name }} </strong> <br />
-														{{ $value->addres}}
-													</td>
-													<td style="">
-														{{ $value->long_address}} {{$value->postal_code}} Indonesia
-													</td>
-													<td>
-														<a data-id="{{ $value->id}}" style="background-color: #9d1818;color: white" class="button change-place"><i class="glyphicon glyphicon-edit"></i> Ubah</a>														
-													</td>
-													<td>
-														<a data-id="{{ $value->id}}" data-alias="{{ $value->place_name }}" style="background-color: #f0ad4e;color: white;" class="button btn-danger remove-place"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
-													</td>
-												</tr>
-											@endForeach
-										@endIf
-										
-									</tbody>
-								</table><!-- /.table-wishlist -->
-							</div><!-- /.wishlist-content -->
-							{!! Form::close() !!}
+						<div id="list_pickup">								
+							<table class="table table-responsive">
+								<thead>
+									<tr>
+										<th>Penerima</th>
+										<th>Alamat Pengiriman</th>
+										<th>Daerah pengiriman</th>
+									</tr>
+								</thead>
+								<tbody>
 
-						</div>
+									@if(count($place_pickup) > 0)
+										@foreach($place_pickup as $key => $value)
+											<tr>
+												<td style="">
+													<strong> {{ $value->recipient_name}} </strong> <br />
+													{{ $value->phone_number_recipient}}
+												</td>
+												<td style="">
+													<strong> {{ $value->place_name }} </strong> <br />
+													{{ $value->addres}}
+												</td>
+												<td style="">
+													{{ $value->long_address}} {{$value->postal_code}} Indonesia
+												</td>
+												<td>
+													<a data-id="{{ $value->id}}" style="background-color: #9d1818;color: white" class="button change-place"><i class="glyphicon glyphicon-edit"></i> Ubah</a>														
+												</td>
+												<td>
+													<a data-id="{{ $value->id}}" data-alias="{{ $value->place_name }}" style="background-color: #f0ad4e;color: white;" class="button btn-danger remove-place"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
+												</td>
+											</tr>
+										@endForeach
+									@endIf
+									
+								</tbody>
+							</table><!-- /.table-wishlist -->
+						</div><!-- /.wishlist-content -->
+						{!! Form::close() !!}
+
 					</div>
 				</div>
 			</div>

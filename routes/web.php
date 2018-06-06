@@ -18,8 +18,8 @@ Route::get('home',[
 ]);
 
 
+Route::get('product/not_found')->uses('ProductController@not_found');
 Route::get('suggest/product')->uses('ProductController@suggest');
-
 Route::get('ajax/get-pulsa', 'AjaxController@getPulsaGet');
 
 Route::get('tes', 'TestController@index');
@@ -71,11 +71,15 @@ Route::post('dropshiper/register', ['uses' => 'DropshiperController@store']);
 
 Route::get('koprasi/{url_koprasi}', 'KoprasiController@index')->middleware('have.shop');
 
+Route::get('transaction/list', 'UserController@list_trasaction');
+Route::get('payment/invoices/{invoce}', 'PaymentController@tagihan')->middleware('auth.member');
+
+Route::get('profile', 'UserController@profile');
+Route::get('profile/edit', 'UserController@edit')->middleware('auth.member');
+Route::get('profile/place/list', 'UserController@place_list')->middleware('auth.member');
 Route::get('my-account', 'UserController@account')->middleware('auth.member');
 Route::get('people/{id}/edit', 'UserController@edit')->middleware('auth.member');
-Route::get('my-account/place/list', 'UserController@place_list')->middleware('auth.member');
 Route::get('account/ajax/place/list', 'UserController@ajax_place_list');
-Route::get('my-account/profile', 'UserController@edit')->middleware('auth.member');
 Route::get('account/get/place', 'UserController@get_place')->middleware('auth.member');
 Route::post('account/edit/image', 'UserController@upload_image')->middleware('auth.member');
 Route::post('account/profile/store', 'UserController@store_profile')->middleware('auth.member');

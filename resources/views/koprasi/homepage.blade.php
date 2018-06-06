@@ -3,6 +3,21 @@
 @section('title', 'Koperasi Dana Masyarakat Indonesia')
 
 @section('content')
+	
+	<style type="text/css">
+		.side-bar{
+			font-size: 17px;
+		}
+
+		.side-bar li a:hover{
+			color: #f28b00;
+		}
+	
+		.side-bar .active{
+			color: #f28b00;
+		}
+	</style>
+
 	<div class="boxed">
 		<div class="overlay" style="opacity: 0; display: none;"></div>
 
@@ -17,11 +32,14 @@
 		    @include('layout.header-top')
 		</section><!-- /#header -->
 
-		@include('layout.breadcrumb')
+		@include('layout.breadcrumb')	
 
 		<section>
-			<div class="container">
-				<div class="row">
+
+			@include('user.sidebar')
+			
+			<div class="col-md-10" style="border-left: 1px solid #e5e5e5">
+				<div class="row" style="margin-left: 10px">
 					<div class="col-md-3">
 						<div class="flexslider">
 							<ul class="slides">
@@ -37,19 +55,15 @@
 								<h4 class="name">Koprasi {{ $user_data['shop']->name }}</h4>								
 							</div><!-- /.header-detail -->
 							<div class="content-detail">
-								<div class="info-text">
+								<div class="info-text" style="text-align: justify;">
 									{{ $user_data['shop']->description }}
 								</div>								
 							</div><!-- /.content-detail -->							
 						</div><!-- /.product-detail style4 -->
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</section><!-- /.flat-product-detail -->		
 
-		<section class="flat-imagebox">
-			<div class="container">
-				<div class="row">
+				<div class="row" style="margin-left: 10px">
 					<div class="col-md-12">
 						<div class="product-tab style2">
 							<ul class="tab-list">
@@ -58,7 +72,8 @@
 						</div><!-- /.product-tab -->
 					</div><!-- /.col-md-12 -->
 				</div><!-- /.row -->
-				<div class="box-product">
+
+				<div class="box-product" style="margin-left: 15px">
 					<div class="row">						
 						@if(isset($list_product))
 							@foreach($list_product as $key => $value)
@@ -67,7 +82,7 @@
 									<div class="imagebox">
 										<div class="box-image">
 											<a href="{{ URL::to($user_data['shop']->url.'/'.$value->alias) }}" title="{{ $value->name }}">
-												<img src="{{ $value->primary_image }}" alt="">
+												<img style="max-height: 200px" src="{{ $value->primary_image }}" alt="">
 											</a>
 										</div><!-- /.box-image -->
 
@@ -105,11 +120,13 @@
 							@endForeach
 						@endIf						
 					</div>					
-				<div class="divider10"></div>				
-			</div><!-- /.container -->
-		</section><!-- /.flat-imagebox -->
+				<div class="divider10"></div>
+			</div>
+		</section>
 
-		@include('layout.pagination')		
+		<div style="clear:both;"></div>
+
+		@include('layout.pagination')
 
 		<footer>
 			<div class="container">

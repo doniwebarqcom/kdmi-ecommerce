@@ -28,12 +28,13 @@ class PaymentController extends CoreController
 			return redirect('payment/tagihan');
 	}
 
-	public function tagihan(Request $request)
+	public function tagihan($invoce, Request $request)
 	{
 		$bill = get_api_response('payment/bill');
+		$user_data =  $this->getUserProfile();
 		if(count($bill->data) === 0)
 			return redirect('home');
 		else
-			return view('payment.billing')->with(['bill' => $bill->data]);		
+			return view('payment.billing')->with(['user_data' => $user_data, 'bill' => $bill->data]);		
 	}
 }

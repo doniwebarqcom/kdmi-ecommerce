@@ -28,7 +28,7 @@ class KoprasiController extends CoreController
             array("name" => 'Koprasi Anda', 'url' => 'koprasi/'.$user_data['shop']->url),
         );
         
-        return view('koprasi.homepage', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging]);
+        return view('koprasi.homepage', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging, 'menu_side_bar' => 'product_koprasi']);
     }
 
     public function register()

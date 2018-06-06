@@ -49,8 +49,11 @@ class ProductController extends CoreController
 
     public function getDetail($product)
     {
-        $user_data =  $this->getUserProfile();
         $product = get_api_response('product/'.$product);
+        if(count($product->data) < 1)
+            return redirect('product/not_found');
+
+        $user_data =  $this->getUserProfile();
         $province = get_api_response('place/province');
         return view('product.detail')->with(['product' => $product->data, 'user_data' => $user_data, 'province' => $province->data]);
     }
@@ -63,7 +66,12 @@ class ProductController extends CoreController
             return redirect('/home');
 
         return view('product.single', ['product' => $product->data, 'user_data' => $user_data]);
-    }        
+    }
+
+    public function not_found()
+    {
+        return view('product.not_found');
+    }
 
     public function add_cart($product)
     {    

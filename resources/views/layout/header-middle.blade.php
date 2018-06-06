@@ -4,7 +4,7 @@
                 <div class="col-md-3">
                     <div id="logo" class="logo">
                         <a href='{{ URL::to("home") }}' title="">
-                            <img src="{{ asset('images/kodami.png') }}" alt="">
+                            <img src="https://res.cloudinary.com/kodami/image/upload/v1528253473/kodami_lww5fk.png" alt="">
                         </a>
                     </div><!-- /#logo -->
                 </div><!-- /.col-md-3 -->

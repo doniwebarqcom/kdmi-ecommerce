@@ -3677,3 +3677,29 @@ ol.comment-list li.comment .comment-text .comment-content p {
 .wishlist{
 	cursor: pointer;
 }
+
+.ruler-sidebar{
+	border-left: 1px solid #e5e5e5
+}
+
+
+.side-bar{
+	font-size: 17px;
+}
+
+.side-bar li a:hover{
+	color: #f28b00;
+}
+
+.side-bar .active{
+	color: #f28b00;
+}
+
+.btn-edit:hover{
+	color: white !important;
+	background: #f28b00;
+}
+
+.btn-edit a:hover{
+	color: white !important;
+}

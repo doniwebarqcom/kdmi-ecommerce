@@ -108,7 +108,7 @@
 
                     <div  class="col-md-4" style="position: absolute; z-index: 1; margin-left: 10%">
                         <div style="margin:20px 30px 30px 30px">
-                            <div class="tab" style="height: 40px;    border-radius: 5px;"><h2 align="center" style="color: #fff; margin-top: 10px">Cari Pulsa</h2></div>
+                            <div class="tab" style="height: 40px;    border-radius: 5px;"><h2 align="center" style="color: #fff; margin-top: 10px">Digital Payment</h2></div>
 
                             <div style="background: #fff;   border: 1px solid #ccc; border-bottom: none;" class="tab">
                                 <ul style="margin-left: 10px; margin-top: 10px; width: 95%"  class="nav nav-tabs">

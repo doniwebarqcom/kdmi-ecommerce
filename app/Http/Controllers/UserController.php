@@ -29,6 +29,26 @@ class UserController extends CoreController
     	return view('user.account', ['user_data' => $user_data, 'breadcrumb' => $breadcrumb]);
     }
 
+    public function profile(Request $request)
+    {
+        $user_data =  $this->getUserProfile();
+        $category =  get_api_response('category');
+        $categoryInSearch =  get_api_response('category-insearch');
+        
+        $body = [
+            'page'  => $request->page ? $request->page : 1
+        ];
+
+        $list_product =  get_api_response('product/list', 'GET', [], $body);
+
+        $breadcrumb = array(
+            array("name" => 'Home', 'url' => 'home'),
+            array("name" => 'Account', 'url' => 'profile'),
+        );
+    
+        return view('user.profile', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging, 'menu_side_bar' => 'account']);
+    }
+
     public function edit()
     {
         $start_year = config('constants.start_year');
@@ -54,7 +74,7 @@ class UserController extends CoreController
             $gM = false;
         }
 
-    	return view('user.edit-account', ['user_data' => $user_data, 'date_day' => config('constants.date_day') , 'date_month' => config('constants.date_month'), 'date_year' => $year, 'date' => $date, 'gF' => $gF, 'gM' => $gM]);
+    	return view('user.edit-account', ['user_data' => $user_data, 'date_day' => config('constants.date_day') , 'date_month' => config('constants.date_month'), 'date_year' => $year, 'date' => $date, 'gF' => $gF, 'gM' => $gM, 'menu_side_bar' => 'account']);
     }
 
     public function upload_image(Request $request)
@@ -82,11 +102,19 @@ class UserController extends CoreController
         echo json_encode($response);
     }
 
+    public function list_trasaction(Request $request)
+    {
+        $transaction = get_api_response('transaction/list');
+        $user_data =  $this->getUserProfile();
+
+        return view('user.list_transaction', ['user_data' => $user_data, 'transaction' => $transaction->data, 'menu_side_bar' => 'transaction']);
+    }
+
     public function place_list()
     {
         $user_data =  $this->getUserProfile();
         $place_pickup = get_api_response('member/place/list');
-        return view('user.edit_pickup_place', ['user_data' => $user_data, 'place_pickup' => $place_pickup->data ]);
+        return view('user.edit_pickup_place', ['user_data' => $user_data, 'place_pickup' => $place_pickup->data, 'menu_side_bar' => 'account' ]);
     }
 
     public function ajax_place_list()

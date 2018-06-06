@@ -1,4 +1,4 @@
-		<section style="margin-bottom: 10px;">
+		<section>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">						
