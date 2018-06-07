@@ -97,27 +97,34 @@
                 </div><!-- /.container -->
             </section><!-- /.flat-imagebox style3 -->
         @endIf
+
+    <script type="text/javascript">
+        ready(function(){
+            var CountDown = function() {
+                var before = '<div class="square"><div class="numb">',
+                    textday = '</div><div class="text">DAYS',
+                    texthour = '</div><div class="text">HOURS',
+                    textmin = '</div><div class="text">MINS',
+                    textsec = '</div><div class="text">SECS';                      
+                    
+                    @foreach($special_offer as $key => $value)                    
+                        $(".co{{$key}}").countdown('{{ date("Y/m/d", $value->expired_time) }}', function(event) {
+                          $(this).html(event.strftime(before + '%D' + textday + '</div></div>' + before + '%H' + texthour + '</div></div>' + before + '%M' + textmin + '</div></div>' + before + '%S' + textsec + '</div>'));
+                        });
+                    @endForeach
+                    
+            }; // Count Down
+                        
+            CountDown();
+        });
+    </script>
+
         
-@section('footer-script')
+<!-- @section('footer-script')
 	<script type="text/javascript">
 		$( document ).ready(function() {
-	    	 var CountDown = function() {
-	            var before = '<div class="square"><div class="numb">',
-	                textday = '</div><div class="text">DAYS',
-	                texthour = '</div><div class="text">HOURS',
-	                textmin = '</div><div class="text">MINS',
-	                textsec = '</div><div class="text">SECS';
-	                if ($().countdown) {
-	                  
-	                    @foreach($special_offer as $key => $value)
-		                    $(".co{{$key}}").countdown('{{ date("Y/m/d", $value->expired_time) }}', function(event) {
-		                      $(this).html(event.strftime(before + '%D' + textday + '</div></div>' + before + '%H' + texthour + '</div></div>' + before + '%M' + textmin + '</div></div>' + before + '%S' + textsec + '</div>'));
-		                    });
-		                @endForeach
-	                }
-	        }; // Count Down
-	        			
-			CountDown();        	
+            alert(123);
+	    	 
 		});		
 	</script>
-@endsection
+@endsection -->

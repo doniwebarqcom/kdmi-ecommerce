@@ -46,6 +46,10 @@
             
         }
 
+        .select2-search__field{
+            height: 30px !important;
+        }
+
         
         </style>
 
@@ -122,7 +126,7 @@
                                                                                                                                 
                                     <div class="form-box new-chat-window">                                        
                                         <input type="text" name="phone" class="new-chat-window-input" id="phonePulsa" placeholder="Example : 0821" style="padding: 8px 15px 8px 70px;" />
-                                        <i class="fa"><img src="http://pulsa.kodami.id/logo-operator/simpati.png" style="width: 58px;"></i>
+                                        <i class="fa" id="img-logo"><img src="http://pulsa.kodami.id/logo-operator/simpati.png" style="width: 58px;"></i>
                                     </div>
                                     <br/>
 
@@ -236,6 +240,27 @@
                 $("#pilihan_paket").html("");
         });
 
+        $("#phonePulsa").keyup(function(){
+            var pre = $(this).val();
+
+
+            if(pre.startsWith('0817') || pre.startsWith('0818') || pre.startsWith('0819') || pre.startsWith('0859') || pre.startsWith('0877') || pre.startsWith('087*'))
+                $("#img-logo").html('<img src="http://pulsa.kodami.id/logo-operator/xl.png" style="width: 58px; height : 35px">');
+
+            if(pre.startsWith('0811') || pre.startsWith('0812') || pre.startsWith('0813') || pre.startsWith('0821') || pre.startsWith('0822'))
+                $("#img-logo").html('<img src="http://pulsa.kodami.id/logo-operator/simpati.png" style="width: 58px;">');
+
+            if(pre.startsWith('0838') || pre.startsWith('0831') || pre.startsWith('0832') || pre.startsWith('0833'))
+                $("#img-logo").html('<img src="http://pulsa.kodami.id/logo-operator/axis.png" style="width: 58px;">');
+
+            if(pre.startsWith('0838') || pre.startsWith('0831') || pre.startsWith('0832') || pre.startsWith('0833'))
+                $("#img-logo").html('<img src="http://pulsa.kodami.id/logo-operator/axis.png" style="width: 58px; height : 35px">');
+
+            if(pre.startsWith('0823') || pre.startsWith('0852') || pre.startsWith('0853') || pre.startsWith('0851'))
+                $("#img-logo").html('<img src="http://pulsa.kodami.id/logo-operator/as.png" style="width: 58px;">');
+
+        });
+
         function callPaket(telp, type)
         {
             $.ajax({
@@ -247,6 +272,8 @@
                 },
                 dataType: 'json',
                 success: function(data){
+                    
+                    
                     $("#pilihan_paket").html("");
                     $.each(data.product, function(key, value){
                         $("#pilihan_paket").append('<option>'+ value.jenis_paket+'</option>');
