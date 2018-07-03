@@ -11,7 +11,6 @@ class AuthController extends Controller
     public function login()
     {
     	$category =  get_api_response('category');
-    	$categoryInSearch =  get_api_response('category-insearch');
         return view('auth.login');
     }
 
@@ -50,6 +49,29 @@ class AuthController extends Controller
             $page = 'home';
 
         return redirect($page);
+    }
+
+    public function cek_login_anggota(Request $request)
+    {        
+        $data_post = [
+            'password'     => $request->password ,
+            'no_anggota'  => $request->no_anggota
+        ];
+
+        $response = get_api_response('member/login/anggota', 'POST', [], $data_post);
+        $code = $response->code;
+        $message = $response->message;
+        $error = $response->error;
+        if($code != 200 OR $error)
+            return view('auth.login', ['message_error' => [$message]]);
+
+        Session::put('token', $response->meta->token);
+        $page = $request->cookie('page');
+
+        if(is_null($page))
+            $page = 'home';
+
+        return redirect($page);    
     }
 
     public function before_login(Request $request)

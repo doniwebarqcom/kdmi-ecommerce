@@ -41,7 +41,7 @@
 								@include('koprasi.product')
 							@else
 								<div style="height: 150px ; width: 100%">
-									<h1 style="height: 90%; width:100%; display:flex; align-items: center;justify-content: center;">Produt Belum Ada Product</h1>
+									<h1 style="height: 90%; width:100%; display:flex; align-items: center;justify-content: center;">Produt Belum Ada Yang Terverifikasi</h1>
 								</div>
 							@endIf						
 						</div>					

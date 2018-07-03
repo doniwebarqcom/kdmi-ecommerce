@@ -24,7 +24,7 @@
                                             </a>
                                         </div><!-- /.box-image -->
                                         <div class="box-content">
-                                            <div class="cat-name">
+                                            <div class="cat-name" style="height: 48px">
                                                 <a href="{{ URL::to('product/'.$value->alias) }}" title="">{{ $value->category }}</a>
                                             </div>
                                             <div class="product-name">

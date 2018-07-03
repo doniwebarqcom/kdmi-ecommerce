@@ -3,75 +3,56 @@
 @section('title', 'Koperasi Dana Masyarakat Indonesia')
 
 @section('content')
-<style type="text/css">
-	
+    <div class="boxed">
+       @include('layout.nav')
 
-	.select2-container--default .select2-selection--single{
-	    border-radius: 0px; 
-	    position: relative;
-	    border: 2px solid #e5e5e5;
-	    height: 48px;
-	    width: 300%;
-	    padding: 2px 5px;
-	    margin-right: 5px;
-	    font-family: 'Open Sans';
-	}
+       <style type="text/css">
+			.select2-container--default .select2-selection--single{
+			    border-radius: 0px; 
+			    position: relative;
+			    border: 2px solid #e5e5e5;
+			    height: 48px;
+			    width: 300%;
+			    padding: 2px 5px;
+			    margin-right: 5px;
+			    font-family: 'Open Sans';
+			}
 
-	.select2-selection__arrow{
-		display: none;
-	}
+			.select2-selection__arrow{
+				display: none;
+			}
 
-	span.select2-dropdown.select2-dropdown--below {
-	    width:300px !important;
-	}
+			span.select2-dropdown.select2-dropdown--below {
+			    width:300px !important;
+			}
 
-	span.select2-dropdown.select2-dropdown--above {
-		width:300px !important;	
-	}
+			span.select2-dropdown.select2-dropdown--above {
+				width:300px !important;	
+			}
 
-	.no-radius{
-		border-radius: 0px !important; 
-	}
+			.no-radius{
+				border-radius: 0px !important; 
+			}
 
-	.select2-selection__rendered{
-		margin-top: 5px;
-	}
-</style>
+			.select2-selection__rendered{
+				margin-top: 5px;
+			}
+		</style>
 
-	<div class="boxed">
-		<div class="overlay" style="opacity: 0; display: none;"></div>
+       <section style="background: #f5f5f5" >
+           <div class="container" >
+                <div class="row">
+                    
+                	@include('user.sidebar')
 
-		<!-- Preloader -->
-		<div class="preloader" style="display: none;">
-			<div class="clear-loading loading-effect-2">
-				<span></span>
-			</div>
-		</div><!-- /.preloader -->
-		
-        <section id="header" class="header">
-		    @include('layout.header-top')
-		</section><!-- /#header -->
-
-		@include('layout.breadcrumb')		
-		<section>
-			@include('user.sidebar')
-
-			<div class="row" style="color: black">
-				<div class="col-md-10 ruler-sidebar">
-					<div style="height: auto !important;padding: 20px !important;">
-						<div class="title" style="margin-bottom: 20px;">
+                    <div class="col-md-10" style="min-height: 200px; background: #ffff; margin-bottom: 20px; margin-top: 10px">
+						<div class="title" style="margin-bottom: 20px; margin-top: 10px">
 							<h2 align="left"><i class="glyphicon glyphicon glyphicon-user"></i> {{ $user_data['name'] }}</h2>
 						</div>						
-						<ul class="nav nav-tabs" style="margin-bottom: 30px;">
-						  	<li><a href="{{ URL::to('profile/edit') }}">Biodata Diri</a></li>
-						  	<li class="active"><a href="">Daftar Alamat</a></li>
-						</ul>
 
 						<button style="height: 40px; font-size: 15px; background-color: #9d1818" type="button" class="btn btn-info btn-lg" id="add-place" data-toggle="modal" data-target="#myModal">+ Tambah Alamat</button>
-
-						{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'edit-account-place'], ['accept-charset' => 'utf-8']) !!}
-
-						<div id="list_pickup">								
+						
+						<div id="list_pickup"> 
 							<table class="table table-responsive">
 								<thead>
 									<tr>
@@ -107,16 +88,15 @@
 									@endIf
 									
 								</tbody>
-							</table><!-- /.table-wishlist -->
-						</div><!-- /.wishlist-content -->
-						{!! Form::close() !!}
+							</table>	
+						</div>
+										
+                    </div>
+                </div>
+           </div>
+       </section>
 
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<div id="modalDestroyData" class="modal fade" role="dialog">
+       <div id="modalDestroyData" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				{!! Form::open(['url' => 'account/place', 'method' => 'post', 'id' => 'delete-place-modal'], ['accept-charset' => 'utf-8']) !!}
@@ -213,175 +193,179 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>    
 
-		<footer>
-			<div class="container">
-				<div class="row">
-					@include('layout.footer1')		
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</footer><!-- /footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    @include('layout.footer1')
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </footer><!-- /footer -->
 
-		<script type="text/javascript">
-			ready(function(){
-												
-			    var availableTags = [];
+        @include('layout.footer-copyright')
 
-			    $(".remove-place").click(function(){
-			    	$("#modalDestroyData").modal('show');
-			    	$("#alias_delete").html($(this).data('alias'));
-			    	$("#delete_id").val($(this).data('id'));
-			    });
+    </div><!-- /.boxed -->
+@endsection
 
-			    $("#add-place").click(function(){
-			    	$(".modal-title").html("Tambah Alamat");
-			    	$("#id").val(0);
-			    	$("#place_alias").val("");
-			    	$("#recipient_name").val("");
-			    	$(".select2-selection__rendered").html("");
-			    	$("#phone").val("");
-			    	$("#district").val("");
-			    	$("#postal_code").val("");
-			    	$("#address").val("");
-			    	$("#edit-account-place-modal").attr("method", "POST");
-					$("#edit-account-place-modal").attr("action", "{{ URL::to('account/place') }}");
-			    });
+@section('footer-script')
+    <script type="text/javascript">
 
-			    $("#delete-btn").click(function(){
-			    	
-			    	$.ajax({
-						type: 'DELETE',
-						url: "{{ url('account/place') }}",
-						data : $('#delete-place-modal').serializeArray(),
-						dataType: 'json',
-						success: function(data){
-							if(data.success === 'false'){
-								alert('somthing error');
-							}
-							else
-							{
-								$("#myModal").modal('hide');
-								$("#list_pickup").html(data.html);
-							}
+    	var availableTags = [];
 
-							$("#modalDestroyData").modal('hide');
-						}
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }        
 
-					});
-			    });
+	    $(".remove-place").click(function(){
+	    	$("#modalDestroyData").modal('show');
+	    	$("#alias_delete").html($(this).data('alias'));
+	    	$("#delete_id").val($(this).data('id'));
+	    });
 
-			    $(".change-place").click(function(){
-			    	$.ajax({
-						type: 'GET',
-						url: "{{ url('account/get/place') }}",
-						data : { id : $(this).data('id')},
-						dataType: 'json',
-						success: function(data){
-							$(".modal-title").html("Edit Alamat");
-					    	$("#id").val(data.id);
-					    	$("#place_alias").val(data.place_name);
-					    	$("#recipient_name").val(data.recipient_name);
-					    	$("#phone").val(data.phone_number_recipient);
-					    	$("#district").html("<option value='"+data.district_id+"'>"+data.long_address+"</option>");
-					    	$('#my-best-friend').val('Bill').trigger('change');  
-					    	$("#postal_code").val(data.postal_code);
-					    	$("#address").val(data.addres);
-					    	$("#edit-account-place-modal").attr("method", "PUT");
-					    	$("#edit-account-place-modal").attr("action", "{{ URL::to('account/place') }}");
-					    	$("#myModal").modal('show');
-						}
+	    $("#add-place").click(function(){
+	    	$(".modal-title").html("Tambah Alamat");
+	    	$("#id").val(0);
+	    	$("#place_alias").val("");
+	    	$("#recipient_name").val("");
+	    	$(".select2-selection__rendered").html("");
+	    	$("#phone").val("");
+	    	$("#district").val("");
+	    	$("#postal_code").val("");
+	    	$("#address").val("");
+	    	$("#edit-account-place-modal").attr("method", "POST");
+			$("#edit-account-place-modal").attr("action", "{{ URL::to('account/place') }}");
+	    });
 
-					});
-			    });
+	    $("#delete-btn").click(function(){
+	    	
+	    	$.ajax({
+				type: 'DELETE',
+				url: "{{ url('account/place') }}",
+				data : $('#delete-place-modal').serializeArray(),
+				dataType: 'json',
+				success: function(data){
+					if(data.success === 'false'){
+						$("#modalDestroyData").modal('hide');
+						alert('somthing error');
+					} else
+						location.reload();
+				}
 
-			    $('#submit').click(function() {
-        			$form = $("#edit-account-place-modal");
-    				var action =  $form.attr('action');
-    				var method =  $form.attr('method');
-    				$.ajax({
-						type: method,
-						url: action,
-						data : $form.serializeArray(),
-						dataType: 'json',
-						success: function(data){
-							if(data.success === 'false')
-								alert('somthing error');
-							else
-							{
-								$("#myModal").modal('hide');
-								$("#list_pickup").html(data.html);
-							}
-						}
-
-					});	
-      			});
-
-				$("#district").select2({
-			    	placeholder: "Cari Kecamatan",
-				    minimumInputLength: 2,
-				    tags: [],
-				    ajax: {
-				        url: "{{ url('place/district') }}",
-				        dataType: 'json',
-				        type: "GET",
-				        quietMillis: 100,
-				        processResults: function (data) {
-							return {
-					            results: $.map(data, function (item) {
-					                return {
-					                    text: item.full_name,
-					                    id: item.id
-					                }
-					            })
-					        };
-					    }
-				    }
-				});
-				    
-			 	// get reference to autocomplete element
-				var dlg = $("#myModal");
-				var input = $("#postal_code", dlg);
-
-		     	// initialize autocomplete
-				input.autocomplete({
-				     source: availableTags,
-				     open: function () {
-				         autoComplete.zIndex(dlg.zIndex()+1);
-				 	 }
-				 });
-
-				autoComplete = input.autocomplete("widget");	
-
-				$("#district").change(function() {
-				 	availableTags = [];
-
-				    $.ajax({
-						type: "GET",
-						url: "{{ url('place/postal-code/district') }}",
-						data : {
-							district : $(this).val()
-						},
-						dataType: 'json',
-						success: function(data){
-							$.each(data, function( index, value ) {
-	  							availableTags.push(value.code);
-							});
-
-							input.autocomplete({
-							     source: availableTags,
-							     open: function () {
-							         autoComplete.zIndex(dlg.zIndex()+1);
-							 	 }
-							 });
-						}
-
-					});			    
-				});  
 			});
-		</script>
+	    });
 
-		@include('layout.footer-copyright')
-	</div>
+	    $(".change-place").click(function(){
+	    	$.ajax({
+				type: 'GET',
+				url: "{{ url('account/get/place') }}",
+				data : { id : $(this).data('id')},
+				dataType: 'json',
+				success: function(data){
+					$(".modal-title").html("Edit Alamat");
+			    	$("#id").val(data.id);
+			    	$("#place_alias").val(data.place_name);
+			    	$("#recipient_name").val(data.recipient_name);
+			    	$("#phone").val(data.phone_number_recipient);
+			    	$("#district").html("<option value='"+data.district_id+"'>"+data.long_address+"</option>");
+			    	$('#my-best-friend').val('Bill').trigger('change');  
+			    	$("#postal_code").val(data.postal_code);
+			    	$("#address").val(data.addres);
+			    	$("#edit-account-place-modal").attr("method", "PUT");
+			    	$("#edit-account-place-modal").attr("action", "{{ URL::to('account/place') }}");
+			    	$("#myModal").modal('show');
+				}
 
+			});
+	    });
+
+	    $('#submit').click(function() {
+			$form = $("#edit-account-place-modal");
+			var action =  $form.attr('action');
+			var method =  $form.attr('method');
+			$.ajax({
+				type: method,
+				url: action,
+				data : $form.serializeArray(),
+				dataType: 'json',
+				success: function(data){
+					if(data.success === 'false')
+					{
+						$("#myModal").modal('hide');
+						alert('somthing error');
+					}else
+						location.reload();
+						
+				}
+
+			});	
+			});
+
+		$("#district").select2({
+	    	placeholder: "Cari Kecamatan",
+		    minimumInputLength: 2,
+		    tags: [],
+		    ajax: {
+		        url: "{{ url('place/district') }}",
+		        dataType: 'json',
+		        type: "GET",
+		        quietMillis: 100,
+		        processResults: function (data) {
+					return {
+			            results: $.map(data, function (item) {
+			                return {
+			                    text: item.full_name,
+			                    id: item.id
+			                }
+			            })
+			        };
+			    }
+		    }
+		});
+		    
+	 	// get reference to autocomplete element
+		var dlg = $("#myModal");
+		var input = $("#postal_code", dlg);
+
+     	// initialize autocomplete
+		input.autocomplete({
+		     source: availableTags,
+		     open: function () {
+		         autoComplete.zIndex(dlg.zIndex()+1);
+		 	 }
+		 });
+
+		autoComplete = input.autocomplete("widget");	
+
+		$("#district").change(function() {
+		 	availableTags = [];
+
+		    $.ajax({
+				type: "GET",
+				url: "{{ url('place/postal-code/district') }}",
+				data : {
+					district : $(this).val()
+				},
+				dataType: 'json',
+				success: function(data){
+					$.each(data, function( index, value ) {
+							availableTags.push(value.code);
+					});
+
+					input.autocomplete({
+					     source: availableTags,
+					     open: function () {
+					         autoComplete.zIndex(dlg.zIndex()+1);
+					 	 }
+					 });
+				}
+
+			});			    
+		});
+    </script>
 @endsection

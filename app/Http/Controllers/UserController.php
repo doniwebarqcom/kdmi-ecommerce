@@ -29,24 +29,74 @@ class UserController extends CoreController
     	return view('user.account', ['user_data' => $user_data, 'breadcrumb' => $breadcrumb]);
     }
 
+    public function dana_simpanan_anggota()
+    {
+        $response = get_api_response('member/dana/simpanan_anggota');
+        if($response->code != 200 OR ! isset($response->data->dana))
+            return response()->json(['dana' => 0, 'reformat_dana' => 0]);
+
+            return response()->json(['dana' => $response->data->dana, 'reformat_dana' => number_format($response->data->dana)]);
+    }
+
+    public function ajaxDataMenu()
+    {
+        $user_data =  $this->getUserProfile();
+        $html = view('user.ajaxHeaderMenu')->with(['user_data' => $user_data])->render();
+        return response()->json(['html' => $html]);
+    }
+
+    public function isi_saldo()
+    {
+        $user_data =  $this->getUserProfile();    
+        return view('user.isi_saldo', ['user_data' => $user_data, 'menu_side_bar' => 'account']);
+    }
+
+    public function store_isi_saldo(Request $request)
+    {        
+        $data_post['saldo'] = $request->saldo ? (int) str_replace(".", "", $request->saldo)  : 0;
+        $data_post['type'] = $request->jenis_pengisian ? (int) $request->jenis_pengisian  : 1;
+        $data_post['type_transaction'] = 1;
+        $response = get_api_response('isi/saldo', 'POST', [], $data_post);
+        if($response->code != 200)
+            return redirect('isi/saldo');
+
+        return redirect('top-up/saldo/'.$response->data->transaction_code);
+    }
+
+    public function top_up($transaction_code, Request $request)
+    {
+        $user_data =  $this->getUserProfile();
+        $response = get_api_response('transaction/'.$transaction_code.'/detail');
+        if($response->code != 200 OR count($response->data) < 1)
+            return redirect('home');
+        
+        return view('user.detail_top_up', ['user_data' => $user_data, 'menu_side_bar' => 'account', 'top_up' => $response->data]);   
+    }
+
     public function profile(Request $request)
     {
         $user_data =  $this->getUserProfile();
-        $category =  get_api_response('category');
-        $categoryInSearch =  get_api_response('category-insearch');
-        
-        $body = [
-            'page'  => $request->page ? $request->page : 1
-        ];
-
-        $list_product =  get_api_response('product/list', 'GET', [], $body);
 
         $breadcrumb = array(
             array("name" => 'Home', 'url' => 'home'),
             array("name" => 'Account', 'url' => 'profile'),
         );
     
-        return view('user.profile', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging, 'menu_side_bar' => 'account']);
+        return view('user.profile', ['user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'menu_side_bar' => 'account']);
+    }
+
+    public function pending_top_up()
+    {
+        $response = get_api_response('pending/top_up');
+        $total = 0;
+        if($response->code != 0 AND count($response->data) < 1)
+            return response()->json(['total' => number_format($total)]);
+
+        foreach ($response->data as $key => $value) {
+            $total = $total + $value->price_total;
+        }
+
+        return response()->json(['total' => number_format($total)]);
     }
 
     public function edit()
@@ -114,7 +164,7 @@ class UserController extends CoreController
     {
         $user_data =  $this->getUserProfile();
         $place_pickup = get_api_response('member/place/list');
-        return view('user.edit_pickup_place', ['user_data' => $user_data, 'place_pickup' => $place_pickup->data, 'menu_side_bar' => 'account' ]);
+        return view('user.edit_pickup_place', ['user_data' => $user_data, 'place_pickup' => $place_pickup->data, 'menu_side_bar' => 'place_list_user' ]);
     }
 
     public function ajax_place_list()
@@ -139,10 +189,10 @@ class UserController extends CoreController
         if($response->code !== 200)
             return response()->json(array('success' => false));
         
-        $place_pickup = get_api_response('member/place/list');
-
-        $returnHTML = view('user.ajax_place_view')->with('place_pickup', $place_pickup->data)->render();
-        return response()->json(array('success' => true, 'html'=>$returnHTML));
+        // $place_pickup = get_api_response('member/place/list');
+        // $returnHTML = view('user.ajax_place_view')->with('place_pickup', $place_pickup->data)->render();
+        
+        return response()->json(array('success' => true));
     }
 
     public function put_place(Request $request)
@@ -162,10 +212,10 @@ class UserController extends CoreController
         if($response->code !== 200)
             return response()->json(array('success' => false));
         
-        $place_pickup = get_api_response('member/place/list');
-
-        $returnHTML = view('user.ajax_place_view')->with('place_pickup', $place_pickup->data)->render();
-        return response()->json(array('success' => true, 'html'=>$returnHTML));
+        // $place_pickup = get_api_response('member/place/list');
+        // $returnHTML = view('user.ajax_place_view')->with('place_pickup', $place_pickup->data)->render();
+        
+        return response()->json(array('success' => true));
     }
 
     public function destroy_place(Request $request)
@@ -179,10 +229,10 @@ class UserController extends CoreController
         if($response->code !== 200)
             return response()->json(array('success' => false));
         
-        $place_pickup = get_api_response('member/place/list');
+        // $place_pickup = get_api_response('member/place/list');
+        // $returnHTML = view('user.ajax_place_view')->with('place_pickup', $place_pickup->data)->render();
 
-        $returnHTML = view('user.ajax_place_view')->with('place_pickup', $place_pickup->data)->render();
-        return response()->json(array('success' => true, 'html'=>$returnHTML));
+        return response()->json(array('success' => true));
     }
 
     public function get_place(Request $request)

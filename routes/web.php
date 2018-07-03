@@ -17,6 +17,19 @@ Route::get('home',[
     'uses' 	=> 'HomeController@index'
 ]);
 
+Route::get('category/getDataAjax', ['as' => 'data-category-ajax', 'uses' => 'CategoryController@ajax']);
+Route::get('u/data', ['as' => 'user-data-ajax-menu', 'uses' => 'UserController@ajaxDataMenu']);
+
+Route::get('user/dana/simpanan_anggota', ['as' => 'dana-simpanan-anggota', 'uses' => 'UserController@dana_simpanan_anggota'])->middleware('auth.member');
+
+Route::get('pending/top-up', ['as' => 'data-category-ajax', 'uses' => 'UserController@pending_top_up'])->middleware('auth.member');
+Route::get('isi/saldo')->uses('UserController@isi_saldo')->name('isi-saldo')->middleware('auth.member');
+Route::post('isi/saldo')->uses('UserController@store_isi_saldo')->name('isi-saldo-post')->middleware('auth.member');
+Route::get('top-up/saldo/{transaction_code}')->uses('UserController@top_up')->name('top-up-saldo')->middleware('auth.member');
+
+Route::get('product/ajax/search', ['as' => 'product-search-ajax', 'uses' => 'ProductController@ajaxSearch']);
+
+Route::get('dashboard')->uses('HomeController@dashboard');
 
 Route::get('product/not_found')->uses('ProductController@not_found');
 Route::get('suggest/product')->uses('ProductController@suggest');
@@ -33,10 +46,10 @@ Route::delete('wishlist')->uses('WishlistController@destroy')->name('wishlist-de
 
 Route::get('k/{category}')->uses('ProductController@search');
 
-
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::get('before-login', ['as' => 'login', 'uses' => 'AuthController@before_login']);
 Route::post('login', 'AuthController@cek_login');
+Route::post('login/anggota', 'AuthController@cek_login_anggota');
 Route::get('logout', 'AuthController@logout');
 Route::post('generate/code', 'AuthController@generaCode');
 Route::post('send/code/register', 'AuthController@sendCode');
@@ -71,10 +84,12 @@ Route::post('dropshiper/register', ['uses' => 'DropshiperController@store']);
 
 Route::get('koprasi/{url_koprasi}', 'KoprasiController@index')->middleware('have.shop');
 
-Route::get('transaction/list', 'UserController@list_trasaction');
+Route::get('koprasi/{url_koprasi}/product/validated', 'KoprasiController@validated_product')->middleware('have.shop');
+
+Route::get('transaction/list', 'UserController@list_trasaction')->middleware('auth.member');
 Route::get('payment/invoices/{invoce}', 'PaymentController@tagihan')->middleware('auth.member');
 
-Route::get('profile', 'UserController@profile');
+Route::get('profile', 'UserController@profile')->middleware('auth.member');
 Route::get('profile/edit', 'UserController@edit')->middleware('auth.member');
 Route::get('profile/place/list', 'UserController@place_list')->middleware('auth.member');
 Route::get('my-account', 'UserController@account')->middleware('auth.member');

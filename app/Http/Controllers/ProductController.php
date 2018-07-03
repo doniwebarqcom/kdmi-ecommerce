@@ -19,6 +19,11 @@ class ProductController extends CoreController
         return view('koprasi.add_product', ['user_data' => $user_data]);
     }
 
+    public function ajaxSearch(Request $request)
+    {
+        
+    }
+
     public function suggest(Request $request)
     {
         $category = $request->get('category') ? (int) $request->get('category') : 0;
@@ -36,7 +41,6 @@ class ProductController extends CoreController
         $list_product = get_api_response('search/product/'.$category, 'GET', [], $body);
         $user_data =  $this->getUserProfile();
         $category =  get_api_response('category');
-        $categoryInSearch =  get_api_response('category-insearch');
 
         $breadcrumb = array(
             array("name" => 'Home', 'url' => 'home'),
@@ -44,7 +48,7 @@ class ProductController extends CoreController
             array("name" => $request->segment(2), 'url' => '#'),
         );
         
-        return view('product.list_search', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging]);
+        return view('product.list_search', ['category' => $category->data, 'user_data' => $user_data, 'breadcrumb' => $breadcrumb, 'list_product' => $list_product->data, 'paginator' => $list_product->pagging]);
     }
 
     public function getDetail($product)

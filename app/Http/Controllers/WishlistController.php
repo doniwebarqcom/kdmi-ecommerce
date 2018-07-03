@@ -19,14 +19,13 @@ class WishlistController extends CoreController
         $user_data =  $this->getUserProfile();
         $wishlist =  get_api_response('wishlist', 'GET', [], $body);
         $category =  get_api_response('category');
-        $categoryInSearch =  get_api_response('category-insearch');
 
         $breadcrumb = array(
             array("name" => 'Home', 'url' => 'home'),
             array("name" => 'Wishlist', 'url' => '#'),
         );
         
-        return view('wishlist.list', ['categoryInSearch' => $categoryInSearch->data, 'user_data' => $user_data, 'category' => $category->data, 'breadcrumb' => $breadcrumb, 'wishlist' => $wishlist->data, 'paginator' => $wishlist->pagging]);
+        return view('wishlist.list', ['user_data' => $user_data, 'category' => $category->data, 'breadcrumb' => $breadcrumb, 'wishlist' => $wishlist->data, 'paginator' => $wishlist->pagging, 'menu_side_bar' => 'wishlist']);
     }
 
     public function destroy(Request $request)

@@ -23,34 +23,16 @@
 </style>
 
 <div class="boxed">
-		<div class="overlay" style="opacity: 0; display: none;"></div>
-
-		<!-- Preloader -->
-		<div class="preloader" style="display: none;">
-			<div class="clear-loading loading-effect-2">
-				<span></span>
-			</div>
-		</div><!-- /.preloader -->
-		
-        <section id="header" class="header">
-		    @include('layout.header-top')
-		    @include('layout.header-middle')
-		    @include('layout.header-bottom')
-		</section><!-- /#header -->
-
+		@include('layout.nav')
 		@include('layout.breadcrumb')
 
-		<!-- Preloader -->
-        <div class="preloader" style="display: none;">
-            <div class="clear-loading loading-effect-2">
-                <span></span>
-            </div>
-        </div><!-- /.preloader -->
-
 		<section class="flat-account background">
-			<div class="container">
+			<div class="container" style="margin-top: -25px">
 				<div class="row">
-					<div class="col-md-6" style="margin: auto;">
+					
+					@include('user.sidebar')
+
+					<div class="col-md-10" style="margin: auto; margin-top: 10px">
 						<div class="form-register" style="height: auto !important;">
 							<div class="title" style="margin-bottom: 0;">
 								<h3>Buka Koprasi Sendiri</h3>

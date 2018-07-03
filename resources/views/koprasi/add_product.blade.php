@@ -4,21 +4,9 @@
 
 @section('content')
 
-<div class="boxed">
-		<div class="overlay" style="opacity: 0; display: none;"></div>
-
-		<!-- Preloader -->
-		<div class="preloader" style="display: none;">
-			<div class="clear-loading loading-effect-2">
-				<span></span>
-			</div>
-		</div><!-- /.preloader -->
+	<div class="boxed">
 		
-        <section id="header" class="header">
-		    @include('layout.header-top')
-		    @include('layout.header-middle')
-		    @include('layout.header-bottom')
-		</section><!-- /#header -->
+        @include('layout.nav')
 
 		@include('layout.breadcrumb')
 

@@ -30,11 +30,11 @@
 								<div class="tab">
 									<button class="tablinks active" id='login_by_email' onclick="openCity(event, 'login-by-email')">Password Login</button>
 									<button class="tablinks" id='login_by_sms' onclick="openCity(event, 'login-by-sms')">SMS Login</button>
+									<button class="tablinks" id='login_anggota' onclick="openCity(event, 'login-by-anggota')">Login Anggota</button>
 								</div>
 								<!-- Tab content -->
 								<div id="login-by-email" class="tabcontent" style="display: block !important;">
-									{!! Form::open(['url' => 'login', 'method' => 'post', 'id' => 'formLogin'], ['accept-charset' => 'utf-8']) !!}
-										
+									{!! Form::open(['url' => 'login', 'method' => 'post', 'id' => 'formLogin'], ['accept-charset' => 'utf-8']) !!}										
 										@if(isset($message_error))
 											<div class="isa_error">								   
 											   	@foreach($message_error as $key => $value)
@@ -67,11 +67,9 @@
 									{!! Form::close() !!}
 								</div>
 
-								<div id="login-by-sms" class="tabcontent">													
+								<div id="login-by-sms" class="tabcontent">
 									{!! Form::open(['url' => 'login/phone', 'method' => 'post', 'id' => 'formLoginByPhone'], ['accept-charset' => 'utf-8']) !!}
-									<br/>									
-
-
+									<br/>
 										<div class="form-box">
 											<div class="row">								  	
 											  	<div class="col-sm-8">
@@ -100,6 +98,28 @@
 
 									{!! Form::close() !!}
 								</div>
+
+								<div id="login-by-anggota" class="tabcontent">
+									{!! Form::open(['url' => 'login/anggota', 'method' => 'post', 'id' => 'formLoginAnggota'], ['accept-charset' => 'utf-8']) !!}
+																	
+										<div class="form-box">
+											{{ Form::label('no_anggota', 'No Anggota * ', ['for' => 'no_anggota']) }}
+											{{ Form::text('no_anggota', '', ['id' => 'no_anggota', 'placeholder' => 'No Anggota']) }}
+										</div>
+
+										<div class="form-box">
+											{{ Form::label('password', 'Password (*)', ['for' => 'password_anggota']) }}
+											{{ Form::password('password', ['id' => 'password_anggota', 'placeholder' => 'Password']) }}
+
+										</div>
+										<div class="form-box">
+											<button type="submit" class="login" style="background-color: #9d1818">Masuk</button>
+											<a href="#" title="">Lost your password?</a>
+										</div><!-- /.form-box -->
+
+									{!! Form::close() !!}
+								</div>
+
 							</div>														
 						</div><!-- /.form-login -->
 					</div><!-- /.col-md-6 -->

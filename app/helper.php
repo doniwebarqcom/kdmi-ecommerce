@@ -2,9 +2,12 @@
 if (!function_exists('get_api_response')) {
    function get_api_response($url = "", $method = "GET", $header = [], $body = [], $body_type = null)
    {
+
+
       $session = Session::all();
       if(isset($session['token']))
          $header['authorization'] = 'Bearer '.$session['token'];
+
 
       if($method == "GET")
          $body_type = "query";
@@ -37,7 +40,6 @@ if (!function_exists('get_api_response')) {
 
          if(isset($result_respon['meta']->token))
             Session::put('token', $result_respon['meta']->token);
-
          return (object) $result_respon;
       }
 

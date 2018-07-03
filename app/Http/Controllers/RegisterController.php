@@ -12,8 +12,7 @@ class RegisterController extends Controller
     public function index()
     {
     	$category =  get_api_response('category');
-    	$categoryInSearch =  get_api_response('category-insearch');
-        return view('register.index', ['categoryInSearch' => $categoryInSearch->data, 'category' => $category->data]);
+        return view('register.index', ['category' => $category->data]);
     }
 
     public function storeData(Request $request)
@@ -33,9 +32,8 @@ class RegisterController extends Controller
 
 		if ($validator->fails()){
 			$category =  get_api_response('category');
-		    $categoryInSearch =  get_api_response('category-insearch');
 			
-			return view('register.index', ['message_error' => $validator->errors()->all(), 'categoryInSearch' => $categoryInSearch->data, 'category' => $category->data]);
+			return view('register.index', ['message_error' => $validator->errors()->all(), 'category' => $category->data]);
 		}
 							
 		$username = str_replace(' ', '_', $request->nama_lengkap);
@@ -59,8 +57,7 @@ class RegisterController extends Controller
 				return view('register.exists', ['message' => $message, 'input' => $request]);
 			else{
 				$category =  get_api_response('category');
-		    	$categoryInSearch =  get_api_response('category-insearch');
-				return view('register.index', ['message_error' => $message, 'categoryInSearch' => $categoryInSearch->data, 'category' => $category->data]);
+				return view('register.index', ['message_error' => $message, 'category' => $category->data]);
 			}
 		}
 

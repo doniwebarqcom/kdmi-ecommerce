@@ -16,13 +16,12 @@ class DropshiperController extends CoreController
         $province =  get_api_response('place/province');
         $ocupation =  get_api_response('ocupation');
         $sellingEnv =  get_api_response('selling/enviroment');
-        $categoryInSearch =  get_api_response('category-insearch');
         $breadcrumb = array(
             array("name" => 'Home', 'url' => 'home'),
             array("name" => 'Register Dropshiper', 'url' => 'dropshiper/register'),
         );
 
-        return view('dropshiper.register', ['province' => $province->data, 'categoryInSearch' => $categoryInSearch->data, 'user_data' => $user_data, 'sellingEnv' => $sellingEnv->data, 'ocupation' => $ocupation->data, 'breadcrumb' => $breadcrumb]);
+        return view('dropshiper.register', ['province' => $province->data, 'user_data' => $user_data, 'sellingEnv' => $sellingEnv->data, 'ocupation' => $ocupation->data, 'breadcrumb' => $breadcrumb]);
     }
 
     public function store(Request $request)

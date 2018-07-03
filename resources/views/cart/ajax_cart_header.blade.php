@@ -16,11 +16,11 @@
                                 	@foreach($cart as $key => $value)
 	                                    <li>
 	                                        <div class="img-product">
-	                                            <img src="{{ $value->product->primary_image }}" alt="">
+	                                            <a href="{{url('product/'.$value->product->alias)}}"><img src="{{ $value->product->primary_image }}" alt=""></a>
 	                                        </div>
 	                                        <div class="info-product">
 	                                            <div class="name">
-	                                                {{ $value->product->name }}
+	                                                <a href="{{url('product/'.$value->product->alias)}}">{{ $value->product->name }}</a>
 	                                            </div>
 	                                            <div class="price">
 	                                                <span>{{ $value->quantity }} x</span>

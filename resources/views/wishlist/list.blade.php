@@ -15,15 +15,15 @@
 		
        	@include('layout.nav')
 
-		@include('layout.breadcrumb')
-
-		<section class="flat-wishlist">
+		<section class="flat-wishlist" style="background: #f5f5f5; margin-top: -40px" >
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					@include('user.sidebar')
+
+					<div class="col-md-10" style="margin-top: 13px; background: white">
 						<div class="wishlist">
 							<div class="title">
-								<h3>My wishlist</h3>
+								<h3 style="margin-top: 10px">My wishlist</h3>
 							</div>
 							<div class="wishlist-content">
 								<table class="table-wishlist">

@@ -14,9 +14,6 @@ class HomeController extends CoreController
     public function index(Request $request)
     {
         $user_data =  $this->getUserProfile();
-    	
-        
-        $categoryInSearch =  get_api_response('category-insearch');
     	$banner =  get_api_response('banner_slideshow');
         $ads_home =  get_api_response('ads-home');
         $category =  get_api_response('category');
@@ -25,7 +22,6 @@ class HomeController extends CoreController
         $most_viewed =  get_api_response('product/most-viewed');        
         $special_offer =  get_api_response('special-offer');
 
-        $data['categoryInSearch'] = $categoryInSearch->data;
         $data['category'] =  $category->data;
         $data['user_data'] =  $user_data;
         $data['banner'] =  $banner->data;
@@ -36,5 +32,10 @@ class HomeController extends CoreController
         $data['special_offer'] =  $special_offer->data;
                 
         return view('welcome', $data);
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard');
     }
 }
