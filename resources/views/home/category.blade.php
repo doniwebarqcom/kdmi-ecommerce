@@ -6,13 +6,15 @@
                             <div class="product-tab style1">
                                 <ul class="tab-list">
                                     @foreach($category_home_product as $key => $value)
-                                        @if($key == 0)
-                                            @php ($active = "active") @endphp
-                                        @else
-                                             @php ($active = "") @endphp
-                                        @endIf
+                                        @if(count($value->product) > 0)
+                                            @if($key == 0)
+                                                @php ($active = "active") @endphp
+                                            @else
+                                                 @php ($active = "") @endphp
+                                            @endIf
 
-                                    	<li class="{{ $active }}">{{ $value->name }}</li>	
+                                        	<li class="{{ $active }}">{{ $value->name }}</li>
+                                        @endIf
                                     @endForeach
                                     
                                 </ul><!-- /.tab-list -->
