@@ -12,8 +12,6 @@ class CheckoutController extends Controller
 	{
 
 		$cart = get_api_response('cart');
-
-		
 		if($cart->data === 0)
 			return view('cart.empty');
 

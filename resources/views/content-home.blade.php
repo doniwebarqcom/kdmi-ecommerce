@@ -1,3 +1,9 @@
+@extends('layout.app')
+
+@section('title', 'Koperasi Dana Masyarakat Indonesia')
+
+@section('content')
+
 		<section class="flat-row flat-banner-box">
             <div class="container">
                 <div class="row">
@@ -4834,3 +4840,5 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </section><!-- /.flat-iconbox -->
+
+@endsection

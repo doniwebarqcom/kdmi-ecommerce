@@ -30,7 +30,7 @@ class HomeController extends CoreController
         $data['most_viewed'] =  $most_viewed->data;
         $data['ads_home'] =  $ads_home->data;
         $data['special_offer'] =  $special_offer->data;
-                
+
         return view('welcome', $data);
     }
 

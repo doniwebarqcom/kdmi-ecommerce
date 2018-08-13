@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="btn-cart">
                                     <a href="{{ url('cart') }}" class="view-cart" title="">View Cart</a>
-                                    <a href="shop-checkout.html" class="check-out" title="">Checkout</a>
+                                    <a href="{{ url('checkout') }}" class="check-out" title="">Checkout</a>
                                 </div>
                             </div>
                             @endIf 

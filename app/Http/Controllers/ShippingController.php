@@ -10,14 +10,16 @@ class ShippingController extends Controller
 {
 	public function getData(Request $request)
 	{
-		$data_post = [
-            'product'	=> $request->product,
-            'regency'	=> $request->regency,           
-            'weigth'	=> $request->weigth           
-        ];
+		/*
+			$data_post = [
+	            'product'	=> $request->product,
+	            'regency'	=> $request->regency,           
+	            'weigth'	=> $request->weigth           
+	        ];
 
-        $response = get_api_response('shipping', 'POST', [], $data_post);
+	        $response = get_api_response('shipping', 'POST', [], $data_post);
+	    */
 
-		return response()->json($response->data);
+		return response()->json(['value' => 0]);
 	}
 }

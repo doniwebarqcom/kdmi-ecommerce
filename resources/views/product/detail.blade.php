@@ -47,7 +47,7 @@
 									{{ $product->category}}
 								</div>
 								<div class="reviewed">
-									<div class="review">
+									<!-- <div class="review">
 										<div class="queue">
 											<i class="fa fa-star" aria-hidden="true"></i>
 											<i class="fa fa-star" aria-hidden="true"></i>
@@ -55,7 +55,7 @@
 											<i class="fa fa-star" aria-hidden="true"></i>
 											<i class="fa fa-star" aria-hidden="true"></i>
 										</div>									
-									</div>
+									</div> -->
 									<div class="status-product">
 										Stock 
 										<span>
@@ -88,7 +88,7 @@
 									</div>									
 								</div>
 								<div class="social-single">
-									<span>SHARE</span>
+									<!-- <span>SHARE</span>
 									<ul class="social-list style2">
 										<li>
 											<a href="#" title="">
@@ -120,7 +120,7 @@
 												<i class="fa fa-google" aria-hidden="true"></i>
 											</a>
 										</li>
-									</ul>
+									</ul> -->
 								</div>
 							</div><!-- /.footer-detail -->
 						</div><!-- /.product-detail style1 -->
@@ -197,10 +197,6 @@
 								</div>
 							</div>
 
-							<div class="col-md-6">
-								Catatan Untuk penjual :
-								<textarea class="no-radius" name="note_for_seller" style="height: 104px" placeholder="Catatan untuk penjual"></textarea>
-							</div>
 						</div>
 
 						{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'self-place'], ['accept-charset' => 'utf-8']) !!}
@@ -213,7 +209,7 @@
 									</div>
 
 									<div style="float: right !important;">
-										<a id="to-add-place" href="#" style="margin-left: 20px; float: right;"> <strong>Tambah Alamat Baru <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></strong></a>
+										<a id="to-add-place" style="margin-left: 20px; float: right;"> <strong>Tambah Alamat Baru <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></strong></a>
 
 										<div class="dropdown" style="float: right;">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>Pilih Alamat Lain </strong></a>
@@ -250,7 +246,7 @@
 						{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'with-new-place'], ['accept-charset' => 'utf-8']) !!}
 							<div class="row content-add-place" style="display: none">
 								<div style="width: 95%; margin-left: 10px; margin-top: 10px">
-									<a id="to-self-place" href="#"><strong>  <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>  Kembali</strong></a>
+									<a id="to-self-place"><strong>  <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>  Kembali</strong></a>
 								</div>
 								
 								<div style="width: 100%;background-color: #f7f7f7; padding: 10px; margin-top: 10px">
@@ -363,30 +359,38 @@
 								var url = '{{ URL::to("before-login") }}?page={{Request::segment(1).'/'.Request::segment(2)}}';
 								window.location = url;
 							}else 
-							{
+							{								
 								$('#myModal').modal('show');
 								$("#dropdown-place").html("");
-								$.each( data.data, function( key, value ) {
-									var li = "<li><a class='dropdown-item with-cursor dropselect' data-id='"+value.id+"' data-district='"+value.district+"' data-long_address='"+value.long_address+"' data-regencyid='"+value.regency_id+"' data-addres='"+value.addres+"' data-phonenumberrecipient='"+value.phone_number_recipient+"' data-placename='"+value.place_name+"' data-postalcode='"+value.postal_code+"' data-province='"+value.province+"' data-recipientname='"+value.recipient_name+"' data-regency='"+value.regency+"'  >"+value.place_name+"</a><li>";
-									$("#dropdown-place").append(li);
 
-									if(key === 0)
-									{
-										$('#recipient-name-modal').html(value.recipient_name);
-										$('#place-alias-modal').html(value.place_name);
-										$('#address').html(value.addres);
-										$('#district-modal').html(value.district);
-										$('#regency-modal').html(value.regency);
-										$('#postal-code-modal').html(value.postal_code);
-										$('#province-modal').html(value.province);
-										$('#telp-modal').html(value.phone_number_recipient);
-										$('#regency_pickup').val(value.regency_id);
-										$('#pickup_id').val(value.id);
+								if(data.data.length > 0)
+								{
+									$.each( data.data, function( key, value ) {
+										var li = "<li><a class='dropdown-item with-cursor dropselect' data-id='"+value.id+"' data-district='"+value.district+"' data-long_address='"+value.long_address+"' data-regencyid='"+value.regency_id+"' data-addres='"+value.addres+"' data-phonenumberrecipient='"+value.phone_number_recipient+"' data-placename='"+value.place_name+"' data-postalcode='"+value.postal_code+"' data-province='"+value.province+"' data-recipientname='"+value.recipient_name+"' data-regency='"+value.regency+"'  >"+value.place_name+"</a><li>";
+										$("#dropdown-place").append(li);
 
-										getShipping($('#regency_pickup').val());									
-									}
+										if(key === 0)
+										{
+											$('#recipient-name-modal').html(value.recipient_name);
+											$('#place-alias-modal').html(value.place_name);
+											$('#address').html(value.addres);
+											$('#district-modal').html(value.district);
+											$('#regency-modal').html(value.regency);
+											$('#postal-code-modal').html(value.postal_code);
+											$('#province-modal').html(value.province);
+											$('#telp-modal').html(value.phone_number_recipient);
+											$('#regency_pickup').val(value.regency_id);
+											$('#pickup_id').val(value.id);
 
-								});
+											getShipping($('#regency_pickup').val());									
+										}
+
+									});
+								} else{
+									$("#to-self-place").hide();
+									$("#to-add-place").trigger("click");
+								}
+								
 
 								$('.dropselect').click(function(){
 									if(parseInt($(this).data('id')) !== parseInt($('#pickup_id').val()))

@@ -51,14 +51,14 @@
 										<div class="title-trans">STATUS</div>
 										<div class="content-trans">
 											@switch($value->status)
-											    @case(1)
+											    @case(0)
 											        Menunggu Pembayaran
 											        @break
-											    @case(2)
-											        Dalam Proses Pembayaran
+											    @case(1)
+											        Dalam Proses Pengiriman
 											        @break
-											    @case(3)
-											        Barang Sudah Diterima
+											    @case(2)
+											        Barang Sudah Diterima (Transaksi Sukses)
 											        @break
 											    @case(4)
 											        Transaksi Gagal

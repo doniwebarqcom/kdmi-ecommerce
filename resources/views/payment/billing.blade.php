@@ -13,15 +13,7 @@
 </style>
 
 <div class="boxed">
-		<div class="overlay" style="opacity: 0; display: none;"></div>
-
-		<!-- Preloader -->
-		<div class="preloader" style="display: none;">
-			<div class="clear-loading loading-effect-2">
-				<span></span>
-			</div>
-		</div><!-- /.preloader -->
-		
+				
         @include('layout.nav')
 
         @include('layout.breadcrumb')
@@ -64,35 +56,40 @@
 												<div class="col-md-6" style="border: 1px solid #dedede"> 
 													<img src="https://www.bukalapak.com/images/logo-bca.gif"><br/>
 													Bank BCA, Jakarta<br/>
-													<b>no rek</b>
+													<b>no rek : - </b><br/>
+													<b>atas nama : -</b>
 												</div>
 
 
 												<div class="col-md-6" style="border: 1px solid #dedede"> 
 													<img src="https://www.bukalapak.com/images/logo-mandiri.gif"><br/>
 													Bank Mandiri, Jakarta<br/>
-													<b>no rek</b>
+													<b>no rek : - </b><br/>
+													<b>atas nama : -</b>
 												</div>
 
 
 												<div class="col-md-6" style="border: 1px solid #dedede"> 
 													<img src="https://www.bukalapak.com/images/logo-bsm.gif"><br/>
 													Bank BSM, Jakarta<br/>
-													<b>no rek</b>
+													<b>no rek : - </b><br/>
+													<b>atas nama : -</b>
 												</div>
 
 
 												<div class="col-md-6" style="border: 1px solid #dedede"> 
 													<img src="https://www.bukalapak.com/images/logo-bni.gif"><br/>
 													Bank BNI, Jakarta<br/>
-													<b>no rek</b>
+													<b>no rek : - </b><br/>
+													<b>atas nama : -</b>
 												</div>
 
 
 												<div class="col-md-6" style="border: 1px solid #dedede"> 
 													<img  src="https://www.bukalapak.com/images/logo-bri.gif"><br/>
 													Bank BRI, Jakarta<br/>
-													<b>no rek</b>
+													<b>no rek : - </b><br/>
+													<b>atas nama : -</b>
 												</div>
 
 											</div>
@@ -119,12 +116,26 @@
 
 									<div class="row">
 										<div class="col-md-12"> 
-											<p style="margin-top: 10px; font-size: 10px">MENUNGGU PEMBAYARAN</p> 
+											<p style="margin-top: 10px; font-size: 10px">STATUS TRANSAKSI</p> 
 											<span>
 												<b>
-												@if($bill->status === 1)
-													MENUNGGU PEMBAYARAN
-												@endIf
+												@switch($bill->status)
+												    @case(0)
+												        Menunggu Pembayaran
+												        @break
+												    @case(1)
+												        Dalam Proses Pengiriman
+												        @break
+												    @case(2)
+												        Barang Sudah Diterima (Transaksi Sukses)
+												        @break
+												    @case(4)
+												        Transaksi Gagal
+												        @break
+
+												    @default
+												       Transaksi Gagal
+												@endswitch
 												</b>
 											</span>
 										</div>

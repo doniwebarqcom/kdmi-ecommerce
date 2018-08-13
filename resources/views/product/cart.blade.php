@@ -38,16 +38,16 @@
 							
 							@include('cart.ajax_cart_view')
 							
-							<div class="form-coupon">
+							<!-- <div class="form-coupon">
 								<form action="#" method="get" accept-charset="utf-8">
 									<div class="coupon-input">
 										<input type="text" name="coupon code" placeholder="Coupon Code">
 										<button type="button">Apply Coupon</button>
 									</div>
 								</form>
-							</div><!-- /.form-coupon -->
-						</div><!-- /.table-cart -->
-					</div><!-- /.col-lg-8 -->
+							</div> -->
+						</div>
+					</div>
 
 					<div class="col-lg-3">
 						<div class="cart-totals">

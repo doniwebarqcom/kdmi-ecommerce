@@ -29,8 +29,8 @@ class PaymentController extends CoreController
 	}
 
 	public function tagihan($invoce, Request $request)
-	{
-		$bill = get_api_response('payment/bill');
+	{		
+		$bill = get_api_response('payment/bill/'.$invoce);
 		$user_data =  $this->getUserProfile();
 		if(count($bill->data) === 0)
 			return redirect('home');
